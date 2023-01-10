@@ -52,7 +52,7 @@ export default class Menu extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isActive: "-00"
+			isActive: "-11"
 		}
 	}
 
@@ -60,6 +60,10 @@ export default class Menu extends Component {
 		this.setState({
 			isActive: String(numGroup) + String(index)
 		})
+	}
+	
+	handleBtnExitActive = () => {
+		// evt.target.classList.add("menu__select-exit_active");
 	}
 	
 	render() {
@@ -73,15 +77,15 @@ export default class Menu extends Component {
 							<ul className="menu__select">
 								{
 									menuDB.innerContentItem.map(({ name, icon }, index) => {
-										const numGroup = 0;
+										let numGroup = 0;
 
 										return (
 											<li onClick={() => this.handleActive(numGroup, index)}
 												className={"menu__select-item" + (isActive === (String(numGroup) + String(index)) ? " menu__select-item_active" : "")}
 												key={name}
 												tabIndex="0">
-												<img src={icon} alt={name} className="menu__select-icon" />
-												<button className={"menu__select-exit"} />
+												<img src={icon} alt={name} className="menu__select-icon" width="30" height="30"/>
+												<button className="menu__select-exit" onClick={() => {numGroup = -1}} />
 											</li>
 										)
 									})

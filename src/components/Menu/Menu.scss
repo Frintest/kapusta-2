@@ -107,6 +107,8 @@
 	}
 }
 
+// click .menu__select-item
+
 .menu__select:has(.menu__select-item_active) .menu__select-item_active {
 	width: 240px;
 }
@@ -118,3 +120,17 @@
 .menu__select:has(.menu__select-item_active) .menu__select-exit {
 	display: block;
 }
+
+// click .menu__select-exit_active
+
+// .menu__select:has(.menu__select-exit_active) .menu__select-item_active {
+// 	width: fit-content;
+// }
+
+// .menu__select:has(.menu__select-exit_active)+.menu__link {
+// 	display: flex;
+// }
+
+// .menu__select:has(.menu__select-exit_active) .menu__select-exit {
+// 	display: none;
+// }
