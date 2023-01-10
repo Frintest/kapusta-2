@@ -10,6 +10,9 @@ export default class App extends Component {
 	render() {
 		return (
 			<Fragment>
+				<main className="main">
+					
+				</main>
 				<Menu></Menu>
 			</Fragment>
 		)

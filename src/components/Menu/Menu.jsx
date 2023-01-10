@@ -52,7 +52,7 @@ export default class Menu extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isActive: "00"
+			isActive: "-00"
 		}
 	}
 
@@ -81,6 +81,7 @@ export default class Menu extends Component {
 												key={name}
 												tabIndex="0">
 												<img src={icon} alt={name} className="menu__select-icon" />
+												<button className={"menu__select-exit"} />
 											</li>
 										)
 									})

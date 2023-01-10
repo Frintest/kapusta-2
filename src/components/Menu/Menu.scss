@@ -13,15 +13,6 @@
 	max-width: max-content;
 }
 
-.menu__select-item {
-	padding: 15px;
-	background: $color-dark-1;
-
-	&_active .menu__select-icon {
-		opacity: 1;
-	}
-}
-
 .menu__link {
 	margin-left: 6px;
 	padding: 6px;
@@ -71,4 +62,59 @@
 	width: 30px;
 	opacity: .3;
 	transition: .3s;
+}
+
+.menu__select-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+	background: $color-dark-1;
+
+	&_active>.menu__select-icon {
+		opacity: 1;
+	}
+}
+
+.menu__select-exit {
+	width: 20px;
+	height: 20px;
+	display: none;
+	position: relative;
+	background: $color-dark-1;
+	border: none;
+	cursor: pointer;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 14px;
+		height: 1px;
+		border-radius: 5px;
+		background: $color-light-2;
+	}
+
+	&::before {
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	&::after {
+		transform: translate(-50%, -50%) rotate(-45deg);
+	}
+}
+
+.menu__select:has(.menu__select-item_active) .menu__select-item_active {
+	width: 240px;
+}
+
+.menu__select:has(.menu__select-item_active)+.menu__link {
+	display: none;
+}
+
+.menu__select:has(.menu__select-item_active) .menu__select-exit {
+	display: block;
 }
