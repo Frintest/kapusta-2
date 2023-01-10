@@ -1,0 +1,74 @@
+@import "../../scss/utilities/variables.scss";
+
+.menu__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.menu__list {
+	padding: 6px;
+	background: $color-dark-4;
+	border-radius: 10px;
+	max-width: max-content;
+}
+
+.menu__select-item {
+	padding: 15px;
+	background: $color-dark-1;
+
+	&_active .menu__select-icon {
+		opacity: 1;
+	}
+}
+
+.menu__link {
+	margin-left: 6px;
+	padding: 6px;
+	background: $color-dark-2;
+	border-radius: 6px;
+}
+
+.menu__link-item {
+	padding: 9px;
+	background: $color-dark-2;
+	border: 1px solid $color-dark-3;
+
+	&_hover:hover {
+		background: #3F413F;
+	}
+
+	&_active {
+		background: #3F413F;
+	}
+
+	&_active .menu__link-icon {
+		opacity: 1;
+	}
+}
+
+.menu__list,
+.menu__select,
+.menu__link {
+	display: flex;
+	align-items: center;
+}
+
+.menu__select-item,
+.menu__link-item {
+	cursor: pointer;
+	border-radius: 6px;
+	transition: .3s;
+}
+
+.menu__select-item+.menu__select-item,
+.menu__link-item+.menu__link-item {
+	margin-left: 6px;
+}
+
+.menu__select-icon,
+.menu__link-icon {
+	width: 30px;
+	opacity: .3;
+	transition: .3s;
+}

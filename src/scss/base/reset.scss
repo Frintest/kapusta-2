@@ -1,0 +1,47 @@
+* {
+	box-sizing: border-box;
+	outline-offset: 3px;
+	outline-color: $color-accent;
+
+	&,
+	&::before,
+	&::after {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+html,
+body {
+	height: 100%;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	color: #000;
+	background: $color-light-1;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul,
+ol {
+	list-style-type: none;
+}
+
+img,
+svg,
+video,
+picture,
+main {
+	display: block;
+}
+
+main {
+	flex: 1 1 auto;
+}
