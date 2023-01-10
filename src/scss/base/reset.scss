@@ -1,7 +1,10 @@
 * {
 	box-sizing: border-box;
-	outline-offset: 3px;
-	outline-color: $color-accent;
+
+	&:focus {
+		outline: 2px solid $color-accent;
+		outline-offset: 3px;
+	}
 
 	&,
 	&::before,
