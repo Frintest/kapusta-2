@@ -4,13 +4,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding-bottom: 110px;
 }
 
 .menu__list {
 	padding: 6px;
 	background: $color-dark-4;
 	border-radius: 10px;
-	max-width: max-content;
+	width: 302px; // 1 подгон для CSSTransition
 }
 
 .menu__link {
@@ -21,7 +22,7 @@
 }
 
 .menu__link-item {
-	padding: 9px;
+	padding: 8px;
 	background: $color-dark-2;
 	border: 1px solid $color-dark-3;
 
@@ -59,7 +60,6 @@
 
 .menu__select-icon,
 .menu__link-icon {
-	width: 30px;
 	opacity: .3;
 	transition: .3s;
 }
@@ -107,30 +107,32 @@
 	}
 }
 
-// click .menu__select-item
+// state .menu__select-item
+.menu__select-item {
 
-.menu__select:has(.menu__select-item_active) .menu__select-item_active {
-	width: 240px;
+	&.enter,
+	&.exit-done {
+		width: 74px; // 2 подгон для CSSTransition
+		transition: .3s;
+	}
+
+	&.enter-done,
+	&.exit {
+		width: 290px; // 3 подгон для CSSTransition
+		transition: .3s;
+	}
 }
 
-.menu__select:has(.menu__select-item_active)+.menu__link {
+.menu__select:has(.menu__select-item.enter)+.menu__link,
+.menu__select:has(.menu__select-item.enter-done)+.menu__link,
+.menu__select:has(.menu__select-item.exit)+.menu__link {
 	display: none;
 }
 
-.menu__select:has(.menu__select-item_active) .menu__select-exit {
-	display: block;
+.menu__select:has(.menu__select-item.exit-done)+.menu__link {
+	display: flex;
 }
 
-// click .menu__select-exit_active
-
-// .menu__select:has(.menu__select-exit_active) .menu__select-item_active {
-// 	width: fit-content;
-// }
-
-// .menu__select:has(.menu__select-exit_active)+.menu__link {
-// 	display: flex;
-// }
-
-// .menu__select:has(.menu__select-exit_active) .menu__select-exit {
-// 	display: none;
-// }
+.menu__select:has(.menu__select-item.enter-done) .menu__select-exit {
+	display: block;
+}

@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { CSSTransition } from "react-transition-group";
 
 import "./Menu.scss";
 
@@ -29,7 +30,7 @@ const menuDB = {
 					icon: storage,
 				},
 			]
-		}
+		},
 	],
 
 	linkItem: [
@@ -48,11 +49,13 @@ const menuDB = {
 	],
 };
 
+const sizeIcon = 44; // dafault 44px
+
 export default class Menu extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isActive: "-11"
+			isActive: "-1"
 		}
 	}
 
@@ -60,10 +63,6 @@ export default class Menu extends Component {
 		this.setState({
 			isActive: String(numGroup) + String(index)
 		})
-	}
-	
-	handleBtnExitActive = () => {
-		// evt.target.classList.add("menu__select-exit_active");
 	}
 	
 	render() {
@@ -78,15 +77,17 @@ export default class Menu extends Component {
 								{
 									menuDB.innerContentItem.map(({ name, icon }, index) => {
 										let numGroup = 0;
+										let active = isActive === String(numGroup) + String(index);
 
 										return (
-											<li onClick={() => this.handleActive(numGroup, index)}
-												className={"menu__select-item" + (isActive === (String(numGroup) + String(index)) ? " menu__select-item_active" : "")}
-												key={name}
-												tabIndex="0">
-												<img src={icon} alt={name} className="menu__select-icon" width="30" height="30"/>
-												<button className="menu__select-exit" onClick={() => {numGroup = -1}} />
-											</li>
+											<CSSTransition in={active} timeout={0} key={name}>
+												<li onClick={() => this.handleActive(numGroup, index)}
+													className={"menu__select-item" + (active ? " menu__select-item_active" : "")}
+													tabIndex="0">
+													<img src={icon} alt={name} className="menu__select-icon" width={sizeIcon} height={sizeIcon}/>
+													<button className="menu__select-exit" onClick={() => {numGroup = -1}} />
+												</li>
+											</CSSTransition>
 										)
 									})
 								}
@@ -96,13 +97,14 @@ export default class Menu extends Component {
 								{
 									menuDB.linkItem.map(({ name, icon }, index) => {
 										const numGroup = 1;
+										let active = isActive === String(numGroup) + String(index);
 
 										return (
 											<li onClick={() => this.handleActive(numGroup, index)}
-												className={"menu__link-item" + (isActive === (String(numGroup) + String(index)) ? " menu__link-item_active" : " menu__link-item_hover")}
+												className={"menu__link-item" + (active ? " menu__link-item_active" : " menu__link-item_hover")}
 												key={name}
 												tabIndex="0">
-												<img src={icon} alt={name} className="menu__link-icon" />
+												<img src={icon} alt={name} className="menu__link-icon" width={sizeIcon} height={sizeIcon}/>
 											</li>
 										)
 									})
