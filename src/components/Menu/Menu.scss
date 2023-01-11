@@ -7,15 +7,11 @@
 	padding-bottom: 110px;
 }
 
-.menu__list,
-.menu__link {
-	display: flex;
-	align-items: center;
-}
-
 .menu__list {
 	width: 302px; // 1 подгон для CSSTransition
 	padding: 6px;
+	display: flex;
+	align-items: center;
 	border-radius: 10px;
 	background: $color-dark-4;
 }
@@ -23,142 +19,6 @@
 .menu__select {
 	display: flex;
 	flex-direction: column;
-}
-
-.menu__select-title {
-	display: none;
-	flex: 1 1 auto;
-	margin-left: 6px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: 'Cousine', monospace;
-	text-transform: uppercase;
-	letter-spacing: 0.02em;
-	color: #747C75;
-}
-
-.menu__link {
-	margin-left: 6px;
-	padding: 6px;
-	border-radius: 6px;
-	background: $color-dark-2;
-}
-
-.menu__link-item {
-	padding: 8px;
-	border: 1px solid $color-dark-3;
-	background: $color-dark-2;
-
-	&_hover:hover {
-		background: #3F413F;
-	}
-
-	&_active {
-		background: #3F413F;
-	}
-
-	&_active .menu__link-icon {
-		opacity: 1;
-	}
-}
-
-.menu__select-item,
-.menu__link-item {
-	border-radius: 6px;
-	cursor: pointer;
-	transition: .3s;
-}
-
-.menu__select-item+.menu__select-item,
-.menu__link-item+.menu__link-item {
-	margin-left: 6px;
-}
-
-.menu__select-item {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 15px;
-	background: $color-dark-1;
-
-	&_active>.menu__select-icon {
-		opacity: 1;
-	}
-}
-
-.menu__select-icon,
-.menu__link-icon {
-	opacity: .3;
-	transition: .3s;
-}
-
-.menu__select-exit {
-	width: 20px;
-	height: 20px;
-	display: none;
-	position: relative;
-	border: none;
-	cursor: pointer;
-	background: $color-dark-1;
-
-	&::before,
-	&::after {
-		content: "";
-		width: 14px;
-		height: 1px;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		border-radius: 5px;
-		background: $color-light-2;
-	}
-
-	&::before {
-		transform: translate(-50%, -50%) rotate(45deg);
-	}
-
-	&::after {
-		transform: translate(-50%, -50%) rotate(-45deg);
-	}
-}
-
-// state .menu__select-item
-.menu__select-item {
-
-	&.enter,
-	&.exit-done {
-		width: 74px; // 2 подгон для CSSTransition
-		transition: .3s;
-	}
-
-	&.enter-done,
-	&.exit {
-		width: 290px; // 3 подгон для CSSTransition
-		transition: .3s;
-	}
-
-	&.enter-done>.menu__select-title {
-		display: block;
-	}
-}
-
-.menu__link {
-
-	&.exit-done {
-		opacity: 1;
-		transition: .12s;
-	}
-
-	&.enter,
-	&.enter-done,
-	&.exit {
-		opacity: 0;
-	}
-}
-
-.menu__select-item.enter-done>.menu__select-exit {
-	display: block;
 }
 
 .menu__options {
@@ -196,4 +56,129 @@
 		letter-spacing: 0.01em;
 		color: $color-light-2;
 	}
+}
+
+.menu__select-item {
+	display: flex;
+	align-items: center;
+	padding: 15px;
+	background: $color-dark-1;
+
+	&.enter,
+	&.exit-done {
+		width: 74px; // 2 подгон для CSSTransition
+		transition: .3s;
+	}
+
+	&.enter-done,
+	&.exit {
+		width: 290px; // 3 подгон для CSSTransition
+		transition: .3s;
+	}
+
+	&.enter-done>.menu__select-icon,
+	&.exit>.menu__select-icon {
+		opacity: 1;
+	}
+
+	&.enter-done>.menu__select-title,
+	&.enter-done>.menu__select-exit {
+		display: block;
+	}
+}
+
+.menu__select-title {
+	display: none;
+	flex: 1 1 auto;
+	margin-left: 6px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: 'Cousine', monospace;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #747C75;
+}
+
+.menu__select-exit {
+	width: 20px;
+	height: 20px;
+	display: none;
+	position: relative;
+	border: none;
+	cursor: pointer;
+	background: $color-dark-1;
+
+	&::before,
+	&::after {
+		content: "";
+		width: 14px;
+		height: 1px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 5px;
+		background: $color-light-2;
+	}
+
+	&::before {
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	&::after {
+		transform: translate(-50%, -50%) rotate(-45deg);
+	}
+}
+
+.menu__link {
+	margin-left: 6px;
+	display: flex;
+	align-items: center;
+	padding: 6px;
+	border-radius: 6px;
+	background: $color-dark-2;
+
+	&.exit-done {
+		opacity: 1;
+		transition: .12s;
+	}
+
+	&.enter,
+	&.enter-done,
+	&.exit {
+		opacity: 0;
+	}
+}
+
+.menu__link-item {
+	padding: 8px;
+	border: 1px solid $color-dark-3;
+	background: $color-dark-2;
+
+	&_hover:hover,
+	&_active {
+		background: #3F413F;
+	}
+
+	&_active .menu__link-icon {
+		opacity: 1;
+	}
+}
+
+.menu__select-item,
+.menu__link-item {
+	border-radius: 6px;
+	cursor: pointer;
+	transition: .3s;
+}
+
+.menu__select-item+.menu__select-item,
+.menu__link-item+.menu__link-item {
+	margin-left: 6px;
+}
+
+.menu__select-icon,
+.menu__link-icon {
+	opacity: .3;
+	transition: .3s;
 }

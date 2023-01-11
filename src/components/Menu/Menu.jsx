@@ -49,8 +49,8 @@ const menuDB = {
 	],
 };
 
-const sizeIcon = 44; // default 44px
-const sizeOption = 18; // default 18px
+const sizeItemIcon = 44; // default 44px
+const sizeOptionIcon = 18; // default 18px
 
 export default class Menu extends Component {
 	constructor() {
@@ -81,14 +81,14 @@ export default class Menu extends Component {
 										let active = isActive === String(numGroup) + String(index);
 
 										return (
-											<Fragment>
+											<Fragment key={name}>
 												<CSSTransition in={active} timeout={100}>
 													<ul className="menu__options">
 														{
 															options.map(({ name, icon }) => {
 																return (
 																	<li className="menu__option" key={name} tabIndex={0}>
-																		<img src={icon} alt={name} className="menu__option-icon" width={sizeOption} height={sizeOption}/>
+																		<img src={icon} alt={name} className="menu__option-icon" width={sizeOptionIcon} height={sizeOptionIcon}/>
 																		<span className="menu__option-title">{name}</span>
 																	</li>
 																)
@@ -97,11 +97,11 @@ export default class Menu extends Component {
 													</ul>
 												</CSSTransition>
 
-												<CSSTransition in={active} timeout={0} key={name}>
+												<CSSTransition in={active} timeout={0}>
 													<li onClick={() => this.handleActive(numGroup, index)}
-														className={"menu__select-item" + (active ? " menu__select-item_active" : "")}
+														className="menu__select-item"
 														tabIndex={0}>
-														<img src={icon} alt={name} className="menu__select-icon" width={sizeIcon} height={sizeIcon}/>
+														<img src={icon} alt={name} className="menu__select-icon" width={sizeItemIcon} height={sizeItemIcon}/>
 														<span className="menu__select-title">{name}</span>
 														<button className="menu__select-exit" onClick={() => {numGroup = -1}} />
 													</li>
@@ -124,7 +124,7 @@ export default class Menu extends Component {
 													className={"menu__link-item" + (active ? " menu__link-item_active" : " menu__link-item_hover")}
 													key={name}
 													tabIndex={0}>
-													<img src={icon} alt={name} className="menu__link-icon" width={sizeIcon} height={sizeIcon}/>
+													<img src={icon} alt={name} className="menu__link-icon" width={sizeItemIcon} height={sizeItemIcon}/>
 												</li>
 											)
 										})
