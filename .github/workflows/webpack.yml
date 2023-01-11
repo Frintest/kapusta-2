@@ -1,14 +1,10 @@
 name: NodeJS with Webpack
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: workflow_dispatch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
@@ -22,5 +18,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
       
-    - name: build
+    - name: Build
       run: react-scripts build
