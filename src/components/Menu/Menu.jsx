@@ -82,7 +82,7 @@ export default class Menu extends Component {
 
 										return (
 											<Fragment key={name}>
-												<CSSTransition in={active} timeout={100}>
+												<CSSTransition in={active} timeout={50}>
 													<ul className="menu__options">
 														{
 															options.map(({ name, icon }) => {
