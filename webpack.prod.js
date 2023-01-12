@@ -18,7 +18,7 @@ module.exports = {
 		}
 	},
 	output: {
-		path: path.resolve(__dirname, 'build'),
+		path: path.resolve(__dirname, 'dist'),
 		clean: true
 	},
 	optimization: {
@@ -75,7 +75,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: '../public/index.html',
+			template: './index.html',
 			filename: 'index.html'
 		}),
 		new MiniCssExtractPlugin({
