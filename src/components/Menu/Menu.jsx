@@ -56,7 +56,8 @@ export default class Menu extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isActive: "-1"
+			isActive: "-1",
+			isOptionActive: -1
 		}
 	}
 
@@ -65,9 +66,15 @@ export default class Menu extends Component {
 			isActive: String(numGroup) + String(index)
 		})
 	}
+
+	handleOptionActive = (index) => {
+		this.setState({
+			isOptionActive: index
+		})
+	}
 	
 	render() {
-		const { isActive } = this.state;
+		const { isActive, isOptionActive } = this.state;
 		
 		return (
 			<section className="menu">
@@ -85,9 +92,12 @@ export default class Menu extends Component {
 												<CSSTransition in={active} timeout={50}>
 													<ul className="menu__options">
 														{
-															options.map(({ name, icon }) => {
+															options.map(({ name, icon }, index) => {
 																return (
-																	<li className="menu__option" key={name} tabIndex={0}>
+																	<li onClick={() => this.handleOptionActive(index)}
+																		className={"menu__option" + (isOptionActive === index ? " menu__option_active": "")}
+																		key={name}
+																		tabIndex={0}>
 																		<img src={icon} alt={name} className="menu__option-icon" width={sizeOptionIcon} height={sizeOptionIcon}/>
 																		<span className="menu__option-title">{name}</span>
 																	</li>
@@ -112,7 +122,7 @@ export default class Menu extends Component {
 								}
 							</ul>
 						
-							<CSSTransition in={isActive === "00"} timeout={200}>
+							<CSSTransition in={isActive === "00"} timeout={280}>
 								<ul className="menu__link">
 									{
 										menuDB.linkItem.map(({ name, icon }, index) => {

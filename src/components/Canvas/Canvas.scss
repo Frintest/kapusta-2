@@ -1,0 +1,23 @@
+.canvas__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.canvas__content {
+	width: fit-content;
+	height: fit-content;
+	padding: 8px;
+	border-radius: 6px;
+	background: rgba(100, 133, 30, 0.5);
+}
+
+.canvas__row {
+	display: flex;
+}
+
+.canvas__cell {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+}
