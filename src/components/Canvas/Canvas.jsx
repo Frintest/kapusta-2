@@ -13,17 +13,21 @@ const meshDB = [
 	{
 		name: "grass",
 		src: textureGrass,
+		isBreak: true,
 		alt: "заросли",
 	},
 	{
 		name:"road",
 		src: textureRoad,
+		isBreak: false,
 		alt: "дорожка",
 		modificators: {},
+		
 	},
 	{
 		name:"cross",
 		src: textureCross,
+		isBreak: false,
 		alt: "перекрёсток",
 	},
 ];
@@ -78,11 +82,11 @@ export default class Canvas extends Component {
 								return (
 									<div className="canvas__row" key={indexRow}>
 										{
-											row.map(({ modificators, src, alt }, indexCell) => {
+											row.map(({ src, alt, ...other}, indexCell) => {
 												const index = String(indexRow) + String(indexCell);
 
 												return (
-													<CanvasCell modificators={modificators ? modificators : ""} src={src} alt={alt} key={index} />
+													<CanvasCell other={other} src={src} alt={alt} key={index} />
 												)
 											})
 										}

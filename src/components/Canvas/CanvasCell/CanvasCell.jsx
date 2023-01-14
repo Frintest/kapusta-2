@@ -20,8 +20,9 @@ export default class CanvasCell extends Component {
 
 	render() {
 		const { isActive } = this.state;
-		const { modificators, src, alt } = this.props;
-		const active = isActive === true;
+		const { other, src, alt } = this.props;
+		const { modificators, isBreak } = other;
+		const active = (isActive === true && isBreak);
 
 		return (
 			<div onClick={() => {this.handleActive()}}
