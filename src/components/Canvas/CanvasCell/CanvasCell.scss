@@ -1,0 +1,14 @@
+.canvas__cell {
+	width: 70px; // ширина текстуры
+	height: 70px; // высота текстуры
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+	cursor: pointer;
+	position: relative;
+}
+
+.canvas__texture {
+	width: 100%;
+	height: 100%;
+}

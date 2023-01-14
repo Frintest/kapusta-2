@@ -1,10 +1,6 @@
-import React from "react";
-import { Component } from "react";
-import { CSSTransition } from "react-transition-group";
+import React, { Component } from "react";
 
-import textureGround from "./assets/textures/ground.png";
-import textureRoad from "./assets/textures/road.svg";
-import textureCross from "./assets/textures/cross.svg";
+import CanvasCell from "./CanvasCell/CanvasCell.jsx";
 
 import "./Canvas.scss";
 
@@ -39,7 +35,7 @@ export default class Canvas extends Component {
 	}
 
 	render() {
-		const { isActive, rotateTexture } = this.state;
+		const { isActive } = this.state;
 
 		return (
 			<section className="canvas">
@@ -52,15 +48,10 @@ export default class Canvas extends Component {
 										{
 											row.map((cell, indexCell) => {
 												const index = String(indexRow) + String(indexCell);
-												const active = index === isActive;
+												// const active = index === isActive;
 
 												return (
-													<CSSTransition in={active} timeout={0} key={index}>
-														<div onClick={() => this.handleActive(index)}
-															className={"canvas__cell" + (active ? " canvas__cell_active" : "")}>
-															<img src={textureGround} alt="ground" className="canvas__texture" />
-														</div>
-													</CSSTransition>
+													<CanvasCell key={index} />
 												)
 											})
 										}
