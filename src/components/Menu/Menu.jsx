@@ -3,7 +3,7 @@ import { CSSTransition } from "react-transition-group";
 
 import "./Menu.scss";
 
-import house from "./menuDB/house.svg";
+import menu from "./menuDB/menu.svg";
 import garden from "./menuDB/garden.svg";
 import storage from "./menuDB/storage.svg";
 import shop from "./menuDB/shop.svg";
@@ -13,16 +13,16 @@ import balance from "./menuDB/balance.svg";
 const menuDB = {
 	innerContentItem: [
 		{
-			name: "Дом",
-			icon: house,
+			name: "Меню",
+			icon: menu,
 			options: [
-				{
-					name: "Сад",
-					icon: garden,
-				},
 				{
 					name: "Склад",
 					icon: storage,
+				},
+				{
+					name: "Баланс",
+					icon: balance,
 				},
 			]
 		},
@@ -30,16 +30,16 @@ const menuDB = {
 
 	linkItem: [
 		{
+			name: "Сад",
+			icon: garden,
+		},
+		{
 			name: "Магазин",
 			icon: shop,
 		},
 		{
 			name: "Рынок",
 			icon: market,
-		},
-		{
-			name: "Баланс",
-			icon: balance,
 		},
 	],
 };
@@ -51,7 +51,7 @@ export default class Menu extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isActive: "-1",
+			isActive: "10",
 			isOptionActive: -1
 		}
 	}

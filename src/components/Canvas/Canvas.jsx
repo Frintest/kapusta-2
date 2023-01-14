@@ -19,9 +19,7 @@ const meshDB = [
 		name:"road",
 		src: textureRoad,
 		alt: "дорожка",
-		modificators: {
-			orientation: "vertical"
-		}
+		modificators: {},
 	},
 	{
 		name:"cross",
