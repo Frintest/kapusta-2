@@ -11,4 +11,8 @@
 .canvas__texture {
 	width: 100%;
 	height: 100%;
+
+	&_horizontal {
+		transform: rotate(90deg);
+	}
 }

@@ -5,7 +5,6 @@ import "./Menu.scss";
 
 import house from "./menuDB/house.svg";
 import garden from "./menuDB/garden.svg";
-import vineyard from "./menuDB/vineyard.svg";
 import storage from "./menuDB/storage.svg";
 import shop from "./menuDB/shop.svg";
 import market from "./menuDB/market.svg";
@@ -20,10 +19,6 @@ const menuDB = {
 				{
 					name: "Сад",
 					icon: garden,
-				},
-				{
-					name: "Виноградник",
-					icon: vineyard,
 				},
 				{
 					name: "Склад",

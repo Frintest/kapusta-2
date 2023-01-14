@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 
-import textureGrass from "./assets/textures/grass3.png";
-import textureDirt from "./assets/textures/dirt.png";
+import textureDirt from "../assets/textures/dirt.png";
 
 import "./CanvasCell.scss";
 
 export default class CanvasCell extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			isActive: false
 		}
@@ -21,14 +20,15 @@ export default class CanvasCell extends Component {
 
 	render() {
 		const { isActive } = this.state;
+		const { modificators, src, alt } = this.props;
 		const active = isActive === true;
 
 		return (
 			<div onClick={() => {this.handleActive()}}
-				className={"canvas__cell"}>
-				<img src={active ? textureDirt : textureGrass}
-					alt={active ? "земля" : "трава"}
-					className="canvas__texture"/>
+				className="canvas__cell">
+				<img className={"canvas__texture" + (modificators.orientation === "horizontal" ? " canvas__texture_horizontal" : '')}
+					src={active ? textureDirt : src}
+					alt={alt} />
 			</div>
 		)
 	}
