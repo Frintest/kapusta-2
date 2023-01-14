@@ -7,23 +7,26 @@ import "./Canvas.scss";
 
 import textureGrass from "./assets/textures/grass.png";
 import textureRoad from "./assets/textures/road.png";
+import textureCross from "./assets/textures/cross.png";
 
 const meshDB = [
 	{
 		name: "grass",
 		src: textureGrass,
-		alt: "grass",
+		alt: "заросли",
+	},
+	{
+		name:"road",
+		src: textureRoad,
+		alt: "дорожка",
 		modificators: {
 			orientation: "vertical"
 		}
 	},
 	{
-		name:"road",
-		src: textureRoad,
-		alt: "road",
-		modificators: {
-			orientation: "vertical"
-		}
+		name:"cross",
+		src: textureCross,
+		alt: "перекрёсток",
 	},
 ];
 
@@ -44,10 +47,8 @@ export default class Canvas extends Component {
 
 		const addRoad = (db) => {
 			let roadMesh = meshDB[1];
-
 			let roadVertical = _.cloneDeep(roadMesh);
 			let roadHorizontal = _.cloneDeep(roadMesh);
-
 			roadVertical.modificators.orientation = "vertical";
 			roadHorizontal.modificators.orientation = "horizontal";
 
@@ -56,7 +57,15 @@ export default class Canvas extends Component {
 
 			db[2][0] = db[2][1] = db[2][3] = db[2][5] = db[2][7] = db[2][8] = roadHorizontal;
 		}
+
+		const addCross = (db) => {
+			let crossMesh = meshDB[2];
+
+			db[2][4] = db[2][6] = crossMesh;
+		}
+		
 		addRoad(canvasDB);
+		addCross(canvasDB);
 
 		return canvasDB;
 	}
@@ -75,7 +84,7 @@ export default class Canvas extends Component {
 												const index = String(indexRow) + String(indexCell);
 
 												return (
-													<CanvasCell modificators={modificators} src={src} alt={alt} key={index} />
+													<CanvasCell modificators={modificators ? modificators : ""} src={src} alt={alt} key={index} />
 												)
 											})
 										}

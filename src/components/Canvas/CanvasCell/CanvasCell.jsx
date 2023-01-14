@@ -26,7 +26,7 @@ export default class CanvasCell extends Component {
 		return (
 			<div onClick={() => {this.handleActive()}}
 				className="canvas__cell">
-				<img className={"canvas__texture" + (modificators.orientation === "horizontal" ? " canvas__texture_horizontal" : '')}
+				<img className={"canvas__texture" + ((modificators && modificators.orientation) === "horizontal" ? " canvas__texture_horizontal" : '')}
 					src={active ? textureDirt : src}
 					alt={alt} />
 			</div>

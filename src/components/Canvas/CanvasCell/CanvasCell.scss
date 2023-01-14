@@ -1,6 +1,6 @@
 .canvas__cell {
-	width: 70px; // ширина текстуры
-	height: 70px; // высота текстуры
+	width: 76px; // ширина текстуры
+	height: 76px; // высота текстуры
 	display: flex;
 	flex-direction: column;
 	user-select: none;
@@ -11,6 +11,11 @@
 .canvas__texture {
 	width: 100%;
 	height: 100%;
+	background: cover;
+	padding: 0;
+	margin: 0;
+	padding-inline: 0;
+	margin-inline: 0;
 
 	&_horizontal {
 		transform: rotate(90deg);
