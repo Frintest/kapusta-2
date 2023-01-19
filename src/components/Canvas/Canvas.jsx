@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FieldContext } from "./FileldContext.jsx";
 import _ from 'lodash';
 
 import Cell from "./Cell/Cell.jsx";
@@ -52,7 +53,7 @@ export default class Canvas extends Component {
 			roadVertical.modificators.orientation = "vertical";
 			roadHorizontal.modificators.orientation = "horizontal";
 
-			field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] =
+			field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = roadVertical;
 			field[5][6] = field[6][6] = field[7][6] = field[8][6] = roadVertical;
 
 			field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = roadHorizontal;
@@ -88,23 +89,26 @@ export default class Canvas extends Component {
 			<section className="canvas">
 				<div className="canvas__container">
 					<div className="canvas__content">
-						{
+						{ <FieldContext.Provider value={this.handleActive}> {
 							this.createField(mesh).map((row, indexRow) => {
 								return (
 									<div className="canvas__row" key={indexRow}>
 										{
 											row.map(({ ...other }, indexCell) => {
 												const index = String(indexRow) + String(indexCell);
+												let active = (indexActive === index);
 				
-												return (
-													<Cell other={other} key={index} />
-												)
+												return <Cell other={other}
+															handleClick={this.handleActive}
+															index={index}
+															isActive={active}
+															key={index} />
 											})
 										}
 									</div>
 								)
 							})
-						}
+						} </FieldContext.Provider> }
 					</div>
 				</div>
 			</section>
