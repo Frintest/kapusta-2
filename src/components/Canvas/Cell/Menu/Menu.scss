@@ -1,0 +1,47 @@
+@import "../../../../scss/utilities/variables.scss";
+
+.canvas__cell-wrapper {
+	position: relative;
+}
+
+.canvas__cell-menu {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -80%);
+	z-index: 20;
+	display: none;
+	
+	&_active {
+		display: block;
+	}
+}
+
+.canvas__cell-list {
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	background: $color-dark-4;
+}
+
+.canvas__cell-item {
+	display: block;
+	padding: 8px;
+	border: 1px solid $color-dark-3;
+	border-radius: 6px;
+	background: $color-dark-3;
+	cursor: pointer;
+	transition: .2s;
+
+	&+& {
+		margin-left: 6px;
+	}
+
+	&:hover {
+		background: #414241;
+	}
+}
+
+.canvas__cell-icon {
+	user-select: none;
+}

@@ -1,0 +1,19 @@
+.canvas__cell {
+	width: 68px; // ширина текстуры
+	height: 68px; // высота текстуры
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+	cursor: pointer;
+}
+
+.canvas__texture {
+	width: 100%;
+	height: 100%;
+
+	&_orientation {
+		&_horizontal {
+			transform: rotate(90deg);
+		}
+	}
+}

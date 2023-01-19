@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from 'lodash';
 
-import CanvasCell from "./CanvasCell/CanvasCell.jsx";
+import Cell from "./Cell/Cell.jsx";
 
 import "./Canvas.scss";
 
@@ -9,7 +9,7 @@ import textureGrass from "./assets/textures/grass.png";
 import textureRoad from "./assets/textures/road.png";
 import textureCross from "./assets/textures/cross.png";
 
-const meshDB = [
+const mesh = [
 	{
 		name: "grass",
 		src: textureGrass,
@@ -22,7 +22,6 @@ const meshDB = [
 		isBreak: false,
 		alt: "дорожка",
 		modificators: {},
-		
 	},
 	{
 		name:"cross",
@@ -33,60 +32,72 @@ const meshDB = [
 ];
 
 export default class Canvas extends Component {
-	generateCanvasData = (meshDB) => {
-		const rowsCount = 6;
-		const cellsCount = 10;
-		const canvasDB = [];
-		const grassTexture = meshDB[0];
+	createField = (mesh) => {
+		let field = [];
+		const fieldWidth = 10;
+		const fieldHeight = 10;
+		let grassMesh = mesh[0];
 
-		for (let i = 0; i < rowsCount; i++) {
-			canvasDB[i] = [];
+		for (let i = 0; i < fieldHeight; i++) {
+			field[i] = [];
 
-			for (let j = 0; j < cellsCount; j++) {
-				canvasDB[i].push(grassTexture);
+			for (let j = 0; j < fieldWidth; j++) {
+				field[i].push(grassMesh);
 			}
 		}
 
-		const addRoad = (db) => {
-			let roadMesh = meshDB[1];
-			let roadVertical = _.cloneDeep(roadMesh);
-			let roadHorizontal = _.cloneDeep(roadMesh);
+		const addRoad = (field, mesh) => {
+			let roadVertical = _.cloneDeep(mesh);
+			let roadHorizontal = _.cloneDeep(mesh);
 			roadVertical.modificators.orientation = "vertical";
 			roadHorizontal.modificators.orientation = "horizontal";
 
-			db[0][4] = db[1][4] = db[3][4] = db[4][4] =
-			db[3][6] = db[4][6] = db[5][6] = roadVertical;
+			field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] =
+			field[5][6] = field[6][6] = field[7][6] = field[8][6] = roadVertical;
 
-			db[2][0] = db[2][1] = db[2][3] = db[2][5] = db[2][7] = db[2][8] = roadHorizontal;
+			field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = roadHorizontal;
 		}
 
-		const addCross = (db) => {
-			let crossMesh = meshDB[2];
-
-			db[2][4] = db[2][6] = crossMesh;
+		const addCross = (field, mesh) => {
+			field[4][4], field[4][6] = mesh;
 		}
 		
-		addRoad(canvasDB);
-		addCross(canvasDB);
+		addRoad(field, mesh[1]);
+		addCross(field, mesh[2]);
 
-		return canvasDB;
+		return field;
+	}
+	
+	constructor(props) {
+		super(props);
+		this.state = {
+			indexActive: null
+		}
+	}
+
+	handleActive = (index) => {
+		this.setState({
+			indexActive: index
+		})
 	}
 
 	render() {
+		const { indexActive } = this.state;
+
 		return (
 			<section className="canvas">
 				<div className="canvas__container">
 					<div className="canvas__content">
 						{
-							this.generateCanvasData(meshDB).map((row, indexRow) => {
+							this.createField(mesh).map((row, indexRow) => {
 								return (
 									<div className="canvas__row" key={indexRow}>
 										{
-											row.map(({ src, alt, ...other}, indexCell) => {
+											row.map(({ ...other }, indexCell) => {
 												const index = String(indexRow) + String(indexCell);
-
+				
 												return (
-													<CanvasCell other={other} src={src} alt={alt} key={index} />
+													<Cell other={other} key={index} />
 												)
 											})
 										}

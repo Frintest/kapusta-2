@@ -9,6 +9,7 @@
 	left: 50%;
 	transform: translate(-50%, 0);
 	bottom: 110px;
+	z-index: 30;
 }
 
 .menu__list {
@@ -195,4 +196,5 @@
 .menu__link-icon {
 	opacity: .4;
 	transition: .3s;
+	user-select: none;
 }
