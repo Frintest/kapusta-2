@@ -1,10 +1,10 @@
-.canvas__container {
+.field__container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.canvas__content {
+.field__content {
 	width: fit-content;
 	height: fit-content;
 	padding: 8px;
@@ -12,6 +12,6 @@
 	background: rgba(100, 133, 30, 0.5);
 }
 
-.canvas__row {
+.field__row {
 	display: flex;
 }

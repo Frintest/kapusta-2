@@ -2,11 +2,9 @@ import React, { Component } from "react";
 
 import Menu from "./Menu/Menu.jsx";
 
-import textureDirt from "../assets/textures/dirt.png";
-
 import "./Cell.scss";
 
-export default class CanvasCell extends Component {
+export default class Cell extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -20,12 +18,12 @@ export default class CanvasCell extends Component {
 		const active = (isActive && isBreak);
 
 		return (
-			<div className="canvas__cell-wrapper">
+			<div className="field__cell-wrapper">
 				<Menu isActive={active} />
 
-				<div className="canvas__cell" onClick={() => handleClick(index)}>
-					<img className={"canvas__texture" + (orientation === "horizontal" ? " canvas__texture_orientation_horizontal" : "")}
-						src={active ? textureDirt : src}
+				<div className="field__cell" onClick={() => handleClick(index)}>
+					<img className={"canvas__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
+						src={src}
 						alt={alt} />
 				</div>
 			</div>

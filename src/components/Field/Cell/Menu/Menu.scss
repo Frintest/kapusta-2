@@ -1,10 +1,10 @@
 @import "../../../../scss/utilities/variables.scss";
 
-.canvas__cell-wrapper {
+.field__cell-wrapper {
 	position: relative;
 }
 
-.canvas__cell-menu {
+.field__cell-menu {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, -80%);
@@ -16,7 +16,7 @@
 	}
 }
 
-.canvas__cell-list {
+.field__cell-list {
 	padding: 5px;
 	display: flex;
 	align-items: center;
@@ -24,7 +24,7 @@
 	background: $color-dark-4;
 }
 
-.canvas__cell-item {
+.field__cell-item {
 	display: block;
 	padding: 8px;
 	border: 1px solid $color-dark-3;
@@ -42,6 +42,6 @@
 	}
 }
 
-.canvas__cell-icon {
+.field__cell-icon {
 	user-select: none;
 }

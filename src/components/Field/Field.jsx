@@ -4,9 +4,10 @@ import _ from 'lodash';
 
 import Cell from "./Cell/Cell.jsx";
 
-import "./Canvas.scss";
+import "./Field.scss";
 
 import textureGrass from "./assets/textures/grass.png";
+import textureDirt from "./assets/textures/dirt.png";
 import textureRoad from "./assets/textures/road.png";
 import textureCross from "./assets/textures/cross.png";
 
@@ -16,6 +17,9 @@ const mesh = [
 		src: textureGrass,
 		isBreak: true,
 		alt: "заросли",
+		modificators: {
+			activeTexture: textureDirt,
+		},
 	},
 	{
 		name:"road",
@@ -32,7 +36,7 @@ const mesh = [
 	},
 ];
 
-export default class Canvas extends Component {
+export default class Field extends Component {
 	createField = (mesh) => {
 		let field = [];
 		const fieldWidth = 10;
@@ -86,23 +90,25 @@ export default class Canvas extends Component {
 		const { indexActive } = this.state;
 
 		return (
-			<section className="canvas">
-				<div className="canvas__container">
-					<div className="canvas__content">
+			<section className="field">
+				<div className="field__container">
+					<div className="field__content">
 						{ <FieldContext.Provider value={this.handleActive}> {
 							this.createField(mesh).map((row, indexRow) => {
 								return (
-									<div className="canvas__row" key={indexRow}>
+									<div className="field__row" key={indexRow}>
 										{
 											row.map(({ ...other }, indexCell) => {
 												const index = String(indexRow) + String(indexCell);
 												let active = (indexActive === index);
 				
-												return <Cell other={other}
+												return (
+													<Cell other={other}
 															handleClick={this.handleActive}
 															index={index}
 															isActive={active}
 															key={index} />
+												)
 											})
 										}
 									</div>

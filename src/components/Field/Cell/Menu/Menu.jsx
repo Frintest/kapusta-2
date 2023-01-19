@@ -6,11 +6,11 @@ import exit from "./MenuDB/exit.svg";
 
 import "./Menu.scss";
 
-const menuDB = [
+const menu = [
 	{
 		icon: shovel,
 		alt: "лопата",
-		exit: true,
+		exit: false,
 	},
 	{
 		icon: exit,
@@ -25,16 +25,16 @@ export default class Menu extends Component {
 		return (
 			<FieldContext.Consumer>
 				{(handleActive) => (
-					<div className={"canvas__cell-menu" + (isActive ? " canvas__cell-menu_active" : "")}>
-						<ul className="canvas__cell-list">
+					<div className={"field__cell-menu" + (isActive ? " field__cell-menu_active" : "")}>
+						<ul className="field__cell-list">
 							{
-								menuDB.map(({ icon, alt, exit }) => {
+								menu.map(({ icon, alt, exit }) => {
 									return (
-										<li className="canvas__cell-item"
+										<li className="field__cell-item"
 											onClick={exit ? () => handleActive(null) : null}
 											key={alt}
 											tabIndex={0}>
-											<img src={icon} alt={alt} className="canvas__cell-icon" width={18} height={18} />
+											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />
 										</li>
 									)
 								})
