@@ -7,7 +7,6 @@ import Cell from "./Cell/Cell.jsx";
 import "./Field.scss";
 
 import textureGrass from "./assets/textures/grass.png";
-import textureDirt from "./assets/textures/dirt.png";
 import textureRoad from "./assets/textures/road.png";
 import textureCross from "./assets/textures/cross.png";
 
@@ -17,9 +16,6 @@ const mesh = [
 		src: textureGrass,
 		isBreak: true,
 		alt: "заросли",
-		modificators: {
-			activeTexture: textureDirt,
-		},
 	},
 	{
 		name:"road",
@@ -104,10 +100,9 @@ export default class Field extends Component {
 				
 												return (
 													<Cell other={other}
-															handleClick={this.handleActive}
-															index={index}
-															isActive={active}
-															key={index} />
+														index={index}
+														isActive={active}
+														key={index} />
 												)
 											})
 										}

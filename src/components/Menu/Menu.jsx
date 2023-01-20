@@ -52,7 +52,7 @@ export default class Menu extends Component {
 		super();
 		this.state = {
 			isActive: "10",
-			isOptionActive: -1
+			isOptionActive: null
 		}
 	}
 
