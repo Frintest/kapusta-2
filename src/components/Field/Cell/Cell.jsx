@@ -34,7 +34,8 @@ export default class Cell extends Component {
 					<div className="field__cell-wrapper">
 						<Menu isActive={active} handleShovelBtn={this.handleShovelBtn} />
 
-						<div className="field__cell" onClick={() => handleActive(index)}>
+						<div className={"field__cell" + (active ? " field__cell_active" : "")}
+							onClick={() => handleActive(index)}>
 							<img className={"canvas__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
 								src={textureActive}
 								alt={alt} />

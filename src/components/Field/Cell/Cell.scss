@@ -1,10 +1,25 @@
 .field__cell {
 	width: 68px; // ширина текстуры
 	height: 68px; // высота текстуры
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	user-select: none;
 	cursor: pointer;
+
+	&::before {
+		content: url("../assets/textures/select.svg");
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: .3s;
+		opacity: 0;
+	}
+	
+	&_active::before {
+		opacity: 1;
+	}
 }
 
 .field__texture {

@@ -13,7 +13,7 @@
 }
 
 .menu__list {
-	width: 302px; // 1 подгон для CSSTransition
+	width: 300px; // 1 подгон для CSSTransition
 	padding: 6px;
 	display: flex;
 	align-items: center;
@@ -87,7 +87,7 @@
 
 	&.enter-done,
 	&.exit {
-		width: 290px; // 3 подгон для CSSTransition
+		width: 288px; // 3 подгон для CSSTransition
 		transition: .3s;
 	}
 
