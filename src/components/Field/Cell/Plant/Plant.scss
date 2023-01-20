@@ -1,0 +1,71 @@
+@import "../../../../scss/utilities/variables.scss";
+
+.field__plant-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 15;
+	padding: 5px;
+	border-radius: 6px;
+	background: $color-dark-4;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.field__plant-list {
+	max-width: fit-content;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	border-radius: 6px;
+	background: $color-dark-2;
+}
+
+.field__plant-item {
+	padding: 10px;
+	border: 1px solid $color-dark-3;
+	border-radius: 6px;
+	background: $color-dark-3;
+	cursor: pointer;
+	transition: .3s;
+
+	&_active,
+	&:hover {
+		background: $color-dark-5;
+	}
+}
+
+.field__plant-item+.field__plant-item {
+	margin-left: 6px;
+}
+
+.field__plant-image-wrapper {
+	position: relative;
+}
+
+.field__plant-image {
+	height: 32px;
+}
+
+.field__plant-image-count {
+	position: absolute;
+	bottom: -4px;
+	right: -4px;
+	display: block;
+	font-size: 10px;
+	font-family: "Roboto Flex", sans-serif;
+	font-weight: 400;
+	letter-spacing: 0.01em;
+	color: $color-light-2;
+}
+
+// .field__plant-name {
+// 	display: block;
+// 	margin-left: 6px;
+// 	font-family: "Roboto Flex", sans-serif;
+// 	font-weight: 400;
+// 	letter-spacing: 0.01em;
+// 	color: $color-light-2;
+// }

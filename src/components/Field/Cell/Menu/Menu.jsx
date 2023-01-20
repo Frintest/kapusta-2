@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { FieldContext } from "../../FileldContext.jsx";
 
 import shovel from "./MenuDB/shovel.svg";
+import plant from "./MenuDB/plant.svg";
 import exit from "./MenuDB/exit.svg";
-import textureDirt from "../../assets/textures/dirt.png";
 
 import "./Menu.scss";
 
@@ -12,6 +12,12 @@ const menu = [
 		name: shovel,
 		icon: shovel,
 		alt: "лопата",
+		exit: true,
+	},
+	{
+		name: plant,
+		icon: plant,
+		alt: "посадить",
 		exit: true,
 	},
 	{
@@ -28,7 +34,7 @@ export default class Menu extends Component {
 	}
 
 	render() {
-		const { isActive, handleShovelBtn } = this.props;
+		const { isActive, handleShovelBtn, handlePlantBtn } = this.props;
 
 		return (
 			<FieldContext.Consumer>
@@ -40,7 +46,8 @@ export default class Menu extends Component {
 									return (
 										<li className="field__cell-item"
 											onClick={() => {
-												name === shovel ? handleShovelBtn(textureDirt) : null;
+												name === shovel ? handleShovelBtn() : null;
+												name === plant ? handlePlantBtn() : null;
 												exit ? handleActive(null) : null;
 											}}
 											key={alt}
