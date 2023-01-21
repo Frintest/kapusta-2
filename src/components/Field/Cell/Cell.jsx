@@ -13,13 +13,14 @@ export default class Cell extends Component {
 		super(props);
 		this.state = {
 			textureActive: this.props.other.src,
-			plantIsActive: false
+			plantIsActive: false,
+			textureProduct: null,
 		}
 	}
 
-	handleShovelBtn = (texture) => {
+	handleShovelBtn = () => {
 		this.setState({
-			textureActive: texture
+			textureActive: textureDirt
 		})
 	}
 
@@ -29,10 +30,16 @@ export default class Cell extends Component {
 		}))
 	}
 
+	getTextureProduct = (src) => {
+		this.setState({
+			textureProduct: src
+		})
+	}
+
 	render() {
 		const { other, isActive, index } = this.props,
 				{ modificators, isBreak, alt } = other,
-				{ textureActive, plantIsActive } = this.state;
+				{ textureActive, plantIsActive, textureProduct } = this.state;
 				
 		const orientation = (modificators && modificators.orientation);
 	
@@ -42,20 +49,22 @@ export default class Cell extends Component {
 			<FieldContext.Consumer>
 				{(handleActive) => (
 					<Fragment>
-						<Plant isActiveClass={plantIsActive ? " plant_active" : ""} closePlant={(src) => {
+						<Plant isActiveClass={plantIsActive ? " plant_active" : ""}
+							closePlant={(src) => {
 								this.handlePlantBtn();
-								this.handleShovelBtn(src);
+								this.getTextureProduct(src);
 							}} />
 						
 						<div className="field__cell-wrapper">
 							<Menu isActive={active}
-								handleShovelBtn={() => this.handleShovelBtn(textureDirt)}
+								handleShovelBtn={this.handleShovelBtn}
 								handlePlantBtn={this.handlePlantBtn} />
 
 							<div className={"field__cell" + (active ? " field__cell_active" : "")} onClick={() => handleActive(index)}>
-								<img className={"canvas__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
+								<img className={"field__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
 									src={textureActive}
 									alt={alt} />
+								<img src={textureProduct} alt="" className="field__texture-product" />
 							</div>
 						</div>
 					</Fragment>
