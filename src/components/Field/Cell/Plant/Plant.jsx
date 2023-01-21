@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import garnet from "./assets/plant-garnet.png";
-import lemon from "./assets/plant-lemon.png";
-import apricot from "./assets/plant-apricot.png";
+import pomegranate from "./assets/plant-pomegranate.png";
+import orange from "./assets/plant-orange.png";
+import banana from "./assets/plant-banana.png";
 import plant from "./assets/plant-plant.svg";
 import exit from "./assets/plant-exit.svg";
 
@@ -10,22 +10,22 @@ import "./Plant.scss";
 
 const plant_db = [
 	{
-		name: "garnet",
-		src: garnet,
+		name: "pomegranate",
+		src: pomegranate,
 		alt: "Гранат",
 		count: 3,
 	},
 	{
-		name: "lemon",
-		src: lemon,
-		alt: "Лимон",
-		count: 1,
+		name: "orange",
+		src: orange,
+		alt: "Апельсины",
+		count: 2,
 	},
 	{
-		name: "apricot",
-		src: apricot,
-		alt: "Абрикос",
-		count: 2,
+		name: "banana",
+		src: banana,
+		alt: "Бананы",
+		count: 8,
 	},
 ];
 
