@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import garnet from "./assets/plantGarnet.png";
-import lemon from "./assets/plantLemon.png";
-import apricot from "./assets/plantApricot.png";
-import plant from "./assets/plantPlant.svg";
-import exit from "./assets/plantExit.svg";
+import garnet from "./assets/plant-garnet.png";
+import lemon from "./assets/plant-lemon.png";
+import apricot from "./assets/plant-apricot.png";
+import plant from "./assets/plant-plant.svg";
+import exit from "./assets/plant-exit.svg";
 
 import "./Plant.scss";
 

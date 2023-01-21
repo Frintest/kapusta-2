@@ -6,11 +6,11 @@ import Cell from "./Cell/Cell.jsx";
 
 import "./Field.scss";
 
-import textureGrass from "./assets/textures/grass.png";
-import textureRoad from "./assets/textures/road.png";
-import textureCross from "./assets/textures/cross.png";
+import textureGrass from "./assets/field-grass.png";
+import textureRoad from "./assets/field-road.png";
+import textureCross from "./assets/field-cross.png";
 
-const mesh = [
+const mesh_db = [
 	{
 		name: "grass",
 		src: textureGrass,
@@ -90,7 +90,7 @@ export default class Field extends Component {
 				<div className="field__container">
 					<div className="field__content">
 						{ <FieldContext.Provider value={this.handleActive}> {
-							this.createField(mesh).map((row, indexRow) => {
+							this.createField(mesh_db).map((row, indexRow) => {
 								return (
 									<div className="field__row" key={indexRow}>
 										{

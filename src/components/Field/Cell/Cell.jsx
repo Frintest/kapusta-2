@@ -4,7 +4,7 @@ import { FieldContext } from "../FileldContext.jsx";
 import Menu from "./Menu/Menu.jsx";
 import Plant from "./Plant/Plant.jsx";
 
-import textureDirt from "../assets/textures/dirt.png";
+import textureDirt from "../assets/field-dirt.png";
 
 import "./Cell.scss";
 

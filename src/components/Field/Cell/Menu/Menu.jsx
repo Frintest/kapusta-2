@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { FieldContext } from "../../FileldContext.jsx";
 
-import shovel from "./MenuDB/shovel.svg";
-import plant from "./MenuDB/plant.svg";
-import exit from "./MenuDB/exit.svg";
+import shovel from "./assets/field-cell-menu-shovel.svg";
+import plant from "./assets/field-cell-menu-plant.svg";
+import exit from "./assets/field-cell-menu-exit.svg";
 
 import "./Menu.scss";
 
-const menu = [
+const menu_db = [
 	{
 		name: shovel,
 		icon: shovel,
@@ -42,7 +42,7 @@ export default class Menu extends Component {
 					<div className={"field__cell-menu" + (isActive ? " field__cell-menu_active" : "")}>
 						<ul className="field__cell-list">
 							{
-								menu.map(({ name, icon, alt, exit }) => {
+								menu_db.map(({ name, icon, alt, exit }) => {
 									return (
 										<li className="field__cell-item"
 											onClick={() => {

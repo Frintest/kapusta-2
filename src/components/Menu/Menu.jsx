@@ -3,14 +3,14 @@ import { CSSTransition } from "react-transition-group";
 
 import "./Menu.scss";
 
-import menu from "./menuDB/menu.svg";
-import garden from "./menuDB/garden.svg";
-import storage from "./menuDB/storage.svg";
-import shop from "./menuDB/shop.svg";
-import market from "./menuDB/market.svg";
-import balance from "./menuDB/balance.svg";
+import menu from "./assets/menu-menu.svg";
+import garden from "./assets/menu-garden.svg";
+import storage from "./assets/menu-storage.svg";
+import shop from "./assets/menu-shop.svg";
+import market from "./assets/menu-market.svg";
+import balance from "./assets/menu-balance.svg";
 
-const menuDB = {
+const menu_db = {
 	innerContentItem: [
 		{
 			name: "Меню",
@@ -78,7 +78,7 @@ export default class Menu extends Component {
 						<ul className="menu__list">
 							<ul className="menu__select">
 								{
-									menuDB.innerContentItem.map(({ name, icon, options }, index) => {
+									menu_db.innerContentItem.map(({ name, icon, options }, index) => {
 										let numGroup = 0;
 										let active = isActive === String(numGroup) + String(index);
 
@@ -120,7 +120,7 @@ export default class Menu extends Component {
 							<CSSTransition in={isActive === "00"} timeout={280}>
 								<ul className="menu__link">
 									{
-										menuDB.linkItem.map(({ name, icon }, index) => {
+										menu_db.linkItem.map(({ name, icon }, index) => {
 											const numGroup = 1;
 											let active = isActive === String(numGroup) + String(index);
 
