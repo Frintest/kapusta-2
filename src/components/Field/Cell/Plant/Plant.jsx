@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 
-import garnet from "./assets/garnet.png";
-import lemon from "./assets/lemon.png";
-import apricot from "./assets/apricot.png";
+import garnet from "./assets/plantGarnet.png";
+import lemon from "./assets/plantLemon.png";
+import apricot from "./assets/plantApricot.png";
+import plant from "./assets/plantPlant.svg";
+import exit from "./assets/plantExit.svg";
 
 import "./Plant.scss";
 
-const plant = [
+const plant_db = [
 	{
 		name: "garnet",
 		src: garnet,
@@ -24,6 +26,19 @@ const plant = [
 		src: apricot,
 		alt: "Абрикос",
 		count: 2,
+	},
+];
+
+const plantStats_db = [
+	{
+		name: "plant",
+		alt: "Посадить",
+		src: plant,
+	},
+	{
+		name: "exit",
+		alt: "Закрыть",
+		src: exit,
 	},
 ];
 
@@ -45,25 +60,42 @@ export default class Plant extends Component {
 		const { isActive } = this.state;
 
 		return (
-			<div className="field__plant-modal">
-				<ul className="field__plant-list">
-					{
-						plant.map(({ name, src, alt, count }, index) => {
-							const active = (isActive === index);
-							return (
-								<li className={"field__plant-item" + (active ? " field__plant-item_active" : "")}
-									onClick={() => this.handleActive(index)}
-									tabIndex={0}
-									key={name}>
-									<div className="field__plant-image-wrapper">
-										<img src={src} alt={alt} className="field__plant-image" />
-										<span className="field__plant-image-count">{count}</span>
-									</div>
-									{/* <span className="field__plant-name">{alt}</span> */}
-								</li>
-							)
-						})
-					}
+			<div className="field__plant plant">
+				<ul className="plant__wrapper">
+					<ul className="plant__inventory">
+						{
+							plant_db.map(({ name, src, alt, count }, index) => {
+								const active = (isActive === index);
+								return (
+									<li className={"plant__inventory-item" + (active ? " plant__inventory-item_active" : "")}
+										onClick={() => this.handleActive(index)}
+										tabIndex={0}
+										key={name}>
+										<div className="plant__product">
+											<img src={src} alt={alt} className="plant__product-image" />
+											<span className="plant__product-count">{count}</span>
+										</div>
+									</li>
+								)
+							})
+						}
+					</ul>
+
+					<li className="plant__item">
+						<span className="plant__item-name">{plant_db[isActive].alt}</span>
+					</li>
+					
+					<ul className="plant__stat">
+						{
+							plantStats_db.map(({ name, alt, src }) => {
+								return (
+									<li className="plant__stat-item" key={name}>
+										<img src={src} alt={alt} className="field__plant__stat-icon" />
+									</li>
+								)
+							})
+						}
+					</ul>
 				</ul>
 			</div>
 		)
