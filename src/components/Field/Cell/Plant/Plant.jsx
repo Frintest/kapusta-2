@@ -58,9 +58,10 @@ export default class Plant extends Component {
 
 	render() {
 		const { isActive } = this.state;
+		const { isActiveClass, closePlant } = this.props;
 
 		return (
-			<div className="field__plant plant">
+			<div className={"field__plant plant" + isActiveClass}>
 				<ul className="plant__wrapper">
 					<ul className="plant__inventory">
 						{
@@ -89,7 +90,7 @@ export default class Plant extends Component {
 						{
 							plantStats_db.map(({ name, alt, src }) => {
 								return (
-									<li className="plant__stat-item" key={name}>
+									<li className="plant__stat-item" onClick={() => closePlant(plant_db[isActive].src)} key={name}>
 										<img src={src} alt={alt} className="field__plant__stat-icon" />
 									</li>
 								)

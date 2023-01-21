@@ -17,9 +17,9 @@ export default class Cell extends Component {
 		}
 	}
 
-	handleShovelBtn = () => {
+	handleShovelBtn = (texture) => {
 		this.setState({
-			textureActive: textureDirt
+			textureActive: texture
 		})
 	}
 
@@ -42,15 +42,17 @@ export default class Cell extends Component {
 			<FieldContext.Consumer>
 				{(handleActive) => (
 					<Fragment>
-						{plantIsActive ? <Plant /> : null}
+						<Plant isActiveClass={plantIsActive ? " plant_active" : ""} closePlant={(src) => {
+								this.handlePlantBtn();
+								this.handleShovelBtn(src);
+							}} />
 						
 						<div className="field__cell-wrapper">
 							<Menu isActive={active}
-								handleShovelBtn={this.handleShovelBtn}
+								handleShovelBtn={() => this.handleShovelBtn(textureDirt)}
 								handlePlantBtn={this.handlePlantBtn} />
 
-							<div className={"field__cell" + (active ? " field__cell_active" : "")}
-								onClick={() => handleActive(index)}>
+							<div className={"field__cell" + (active ? " field__cell_active" : "")} onClick={() => handleActive(index)}>
 								<img className={"canvas__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
 									src={textureActive}
 									alt={alt} />
