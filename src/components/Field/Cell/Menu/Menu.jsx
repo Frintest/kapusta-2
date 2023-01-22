@@ -12,19 +12,16 @@ const menu_db = [
 		name: shovel,
 		icon: shovel,
 		alt: "лопата",
-		exit: true,
 	},
 	{
 		name: plant,
 		icon: plant,
 		alt: "посадить",
-		exit: true,
 	},
 	{
 		name: exit,
 		icon: exit,
 		alt: "закрыть",
-		exit: true,
 	},
 ];
 
@@ -34,22 +31,18 @@ export default class Menu extends Component {
 	}
 
 	render() {
-		const { isActive, handleShovelBtn, handlePlantBtn } = this.props;
+		const { index, isActive } = this.props;
 
 		return (
 			<FieldContext.Consumer>
-				{(handleActive) => (
+				{({ field }) => (
 					<div className={"field__cell-menu" + (isActive ? " field__cell-menu_active" : "")}>
 						<ul className="field__cell-list">
 							{
-								menu_db.map(({ name, icon, alt, exit }) => {
+								menu_db.map(({ icon, alt }) => {
 									return (
 										<li className="field__cell-item"
-											onClick={() => {
-												name === shovel ? handleShovelBtn() : null;
-												name === plant ? handlePlantBtn() : null;
-												exit ? handleActive(null) : null;
-											}}
+											onClick={() => field(index, false)}
 											key={alt}
 											tabIndex={0}>
 											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />

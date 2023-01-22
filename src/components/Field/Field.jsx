@@ -35,24 +35,20 @@ const mesh_db = [
 ];
 
 export default class Field extends Component {
-	createField = (mesh, index) => {
+	createField = (mesh, index, active) => {
 		let field = [];
 		const fieldWidth = 10;
 		const fieldHeight = 10;
-		let grassMesh = mesh[0];
 
 		for (let i = 0; i < fieldHeight; i++) {
-			field[i] = [];
-
-			for (let j = 0; j < fieldWidth; j++) {
-				field[i].push(grassMesh);
-			}
+			field[i] = new Array(fieldWidth).fill(mesh[0]);
 		}
 
 		this.addRoad(field, mesh[1]);
 		this.addCross(field, mesh[2]);
 
-		this.setActiveCell(field, index);
+		(index != null && active === true) ? this.addActiveCell(field, index, active) : null;
+		(index != null && active === false) ? this.deleteActiveCell(field, index, active) : null;
 
 		return field;
 	}
@@ -75,7 +71,7 @@ export default class Field extends Component {
 	}
 
 
-	setActiveCell = (field, index) => {
+	addActiveCell = (field, index) => {
 		const rowIndex = Math.trunc(Number(index) / 10);
 		const cellIndex = Number(index) % 10;
 
@@ -85,17 +81,27 @@ export default class Field extends Component {
 	}
 
 
+	deleteActiveCell = (field, index) => {
+		const rowIndex = Math.trunc(Number(index) / 10);
+		const cellIndex = Number(index) % 10;
+
+		let cellActive = _.cloneDeep(field[rowIndex][cellIndex]);
+		cellActive.modificators.active = false;
+		field[rowIndex][cellIndex] = cellActive;
+	}
+
+
 	constructor() {
 		super();
 		this.state = {
-			field: this.createField(mesh_db, null)
+			field: this.createField(mesh_db, null, false)
 		}
 	}
 
 
-	changeField = (index) => {
+	changeField = (index, active) => {
 		this.setState({
-			field: this.createField(mesh_db, index)
+			field: this.createField(mesh_db, index, active)
 		})
 	}
 
@@ -107,9 +113,7 @@ export default class Field extends Component {
 			<section className="field">
 				<div className="field__container">
 					<div className="field__content">
-						<FieldContext.Provider value={{
-							field: this.changeField
-						}}>
+						<FieldContext.Provider value={{field: this.changeField}}>
 							{field.map((row, indexRow) => {
 								return (
 									<div className="field__row" key={indexRow}>

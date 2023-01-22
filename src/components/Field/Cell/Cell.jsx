@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { FieldContext } from "../FileldContext.jsx";
 
-// import Menu from "./Menu/Menu.jsx";
+import Menu from "./Menu/Menu.jsx";
 // import Plant from "./Plant/Plant.jsx";
 
 // import textureDirt from "../assets/field-dirt.png";
@@ -54,12 +54,11 @@ export default class Cell extends Component {
 							}} /> */}
 						
 						<div className="field__cell-wrapper">
-							{/* <Menu isActive={active}
-								handleShovelBtn={this.handleShovelBtn}
-								handlePlantBtn={this.handlePlantBtn} /> */}
+							<Menu index={index} isActive={isActive} />
 
-							<div className={"field__cell" + (isActive ? " field__cell_active" : "")} onClick={() => field(index)}>
-								<img className={"field__texture" + (orientation && orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
+							<div className={"field__cell" + (isActive ? " field__cell_active" : "")}
+								onClick={() => field(index, true)}>
+								<img className={"field__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
 									src={src}
 									alt={alt} />
 								{/* <img src={src} alt="" className="field__texture-product" /> */}
