@@ -4,8 +4,6 @@ import { FieldContext } from "../FileldContext.jsx";
 import Menu from "./Menu/Menu.jsx";
 // import Plant from "./Plant/Plant.jsx";
 
-// import textureDirt from "../assets/field-dirt.png";
-
 import "./Cell.scss";
 
 export default class Cell extends Component {
@@ -17,12 +15,6 @@ export default class Cell extends Component {
 		// 	textureProduct: null,
 		// }
 	}
-
-	// handleShovelBtn = () => {
-	// 	this.setState({
-	// 		textureActive: textureDirt
-	// 	})
-	// }
 
 	// handlePlantBtn = () => {
 	// 	this.setState(({ plantIsActive }) => ({

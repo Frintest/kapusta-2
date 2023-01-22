@@ -9,6 +9,7 @@ import "./Field.scss";
 import textureGrass from "./assets/field-grass.png";
 import textureRoad from "./assets/field-road.png";
 import textureCross from "./assets/field-cross.png";
+import textureDirt from "./assets/field-dirt.png";
 
 const mesh_db = [
 	{
@@ -35,7 +36,7 @@ const mesh_db = [
 ];
 
 export default class Field extends Component {
-	createField = (mesh, index, active) => {
+	createField = (mesh, index = null, active = false, action = null) => {
 		let field = [];
 		const fieldWidth = 10;
 		const fieldHeight = 10;
@@ -47,22 +48,24 @@ export default class Field extends Component {
 		this.addRoad(field, mesh[1]);
 		this.addCross(field, mesh[2]);
 
-		(index != null && active === true) ? this.addActiveCell(field, index, active) : null;
-		(index != null && active === false) ? this.deleteActiveCell(field, index, active) : null;
+		(index !== null && active === true) ? this.setActiveCell(index, field) : null;
+		(index != null && active === false) ? this.deleteActiveCell(index, field) : null;
+
+		action === "menu-dig-up" ? this.digUpCell(index, field, textureDirt) : null;
 
 		return field;
 	}
 
 
 	addRoad = (field, mesh) => {
-		let roadVertical = _.cloneDeep(mesh);
-		let roadHorizontal = _.cloneDeep(mesh);
-		roadHorizontal.modificators.orientation = "horizontal";
+		let vertical = _.cloneDeep(mesh);
+		let horizontal = _.cloneDeep(mesh);
+		horizontal.modificators.orientation = "horizontal";
 
-		field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = roadVertical;
-		field[5][6] = field[6][6] = field[7][6] = field[8][6] = roadVertical;
+		field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = vertical;
+		field[5][6] = field[6][6] = field[7][6] = field[8][6] = vertical;
 
-		field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = roadHorizontal;
+		field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = horizontal;
 	}
 
 
@@ -71,37 +74,41 @@ export default class Field extends Component {
 	}
 
 
-	addActiveCell = (field, index) => {
+	cloneMesh = (index, field) => {
 		const rowIndex = Math.trunc(Number(index) / 10);
 		const cellIndex = Number(index) % 10;
-
-		let cellActive = _.cloneDeep(field[rowIndex][cellIndex]);
-		cellActive.modificators.active = true;
-		field[rowIndex][cellIndex] = cellActive;
+		let cloneMesh = _.cloneDeep(field[rowIndex][cellIndex]);
+		field[rowIndex][cellIndex] = cloneMesh;
+		return field[rowIndex][cellIndex];
 	}
 
 
-	deleteActiveCell = (field, index) => {
-		const rowIndex = Math.trunc(Number(index) / 10);
-		const cellIndex = Number(index) % 10;
+	setActiveCell = (index, field) => {
+		this.cloneMesh(index, field).modificators.active = true;
+	}
 
-		let cellActive = _.cloneDeep(field[rowIndex][cellIndex]);
-		cellActive.modificators.active = false;
-		field[rowIndex][cellIndex] = cellActive;
+
+	deleteActiveCell = (index, field) => {
+		this.cloneMesh(index, field).modificators.active = false;
+	}
+
+
+	digUpCell = (index, field, texture) => {
+		this.cloneMesh(index, field).src = texture;
 	}
 
 
 	constructor() {
 		super();
 		this.state = {
-			field: this.createField(mesh_db, null, false)
+			field: this.createField(mesh_db)
 		}
 	}
 
 
-	changeField = (index, active) => {
+	changeField = (index, active, action) => {
 		this.setState({
-			field: this.createField(mesh_db, index, active)
+			field: this.createField(mesh_db, index, active, action)
 		})
 	}
 

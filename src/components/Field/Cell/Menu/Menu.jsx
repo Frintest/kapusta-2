@@ -9,17 +9,17 @@ import "./Menu.scss";
 
 const menu_db = [
 	{
-		name: shovel,
+		name: "dig-up",
 		icon: shovel,
-		alt: "лопата",
+		alt: "вскопать",
 	},
 	{
-		name: plant,
+		name: "plant",
 		icon: plant,
 		alt: "посадить",
 	},
 	{
-		name: exit,
+		name: "exit",
 		icon: exit,
 		alt: "закрыть",
 	},
@@ -39,10 +39,10 @@ export default class Menu extends Component {
 					<div className={"field__cell-menu" + (isActive ? " field__cell-menu_active" : "")}>
 						<ul className="field__cell-list">
 							{
-								menu_db.map(({ icon, alt }) => {
+								menu_db.map(({ name, icon, alt }) => {
 									return (
 										<li className="field__cell-item"
-											onClick={() => field(index, false)}
+											onClick={() => field(index, false, `menu-${name}`)}
 											key={alt}
 											tabIndex={0}>
 											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />
