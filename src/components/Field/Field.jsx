@@ -16,6 +16,7 @@ const mesh_db = [
 		src: textureGrass,
 		isBreak: true,
 		alt: "заросли",
+		modificators: {},
 	},
 	{
 		name:"road",
@@ -29,11 +30,12 @@ const mesh_db = [
 		src: textureCross,
 		isBreak: false,
 		alt: "перекрёсток",
+		modificators: {},
 	},
 ];
 
 export default class Field extends Component {
-	createField = (mesh) => {
+	createField = (mesh, index) => {
 		let field = [];
 		const fieldWidth = 10;
 		const fieldHeight = 10;
@@ -47,69 +49,83 @@ export default class Field extends Component {
 			}
 		}
 
-		const addRoad = (field, mesh) => {
-			let roadVertical = _.cloneDeep(mesh);
-			let roadHorizontal = _.cloneDeep(mesh);
-			roadVertical.modificators.orientation = "vertical";
-			roadHorizontal.modificators.orientation = "horizontal";
+		this.addRoad(field, mesh[1]);
+		this.addCross(field, mesh[2]);
 
-			field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = roadVertical;
-			field[5][6] = field[6][6] = field[7][6] = field[8][6] = roadVertical;
-
-			field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = roadHorizontal;
-		}
-
-		const addCross = (field, mesh) => {
-			field[4][4], field[4][6] = mesh;
-		}
-		
-		addRoad(field, mesh[1]);
-		addCross(field, mesh[2]);
+		this.setActiveCell(field, index);
 
 		return field;
 	}
-	
-	constructor(props) {
-		super(props);
+
+
+	addRoad = (field, mesh) => {
+		let roadVertical = _.cloneDeep(mesh);
+		let roadHorizontal = _.cloneDeep(mesh);
+		roadHorizontal.modificators.orientation = "horizontal";
+
+		field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = roadVertical;
+		field[5][6] = field[6][6] = field[7][6] = field[8][6] = roadVertical;
+
+		field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = roadHorizontal;
+	}
+
+
+	addCross = (field, mesh) => {
+		field[4][4], field[4][6] = mesh;
+	}
+
+
+	setActiveCell = (field, index) => {
+		const rowIndex = Math.trunc(Number(index) / 10);
+		const cellIndex = Number(index) % 10;
+
+		let cellActive = _.cloneDeep(field[rowIndex][cellIndex]);
+		cellActive.modificators.active = true;
+		field[rowIndex][cellIndex] = cellActive;
+	}
+
+
+	constructor() {
+		super();
 		this.state = {
-			indexActive: null
+			field: this.createField(mesh_db, null)
 		}
 	}
 
-	handleActive = (index) => {
+
+	changeField = (index) => {
 		this.setState({
-			indexActive: index
+			field: this.createField(mesh_db, index)
 		})
 	}
 
+
 	render() {
-		const { indexActive } = this.state;
+		const { field } = this.state;
 
 		return (
 			<section className="field">
 				<div className="field__container">
 					<div className="field__content">
-						{ <FieldContext.Provider value={this.handleActive}> {
-							this.createField(mesh_db).map((row, indexRow) => {
+						<FieldContext.Provider value={{
+							field: this.changeField
+						}}>
+							{field.map((row, indexRow) => {
 								return (
 									<div className="field__row" key={indexRow}>
 										{
-											row.map(({ ...other }, indexCell) => {
+											row.map(({ ...cell }, indexCell) => {
 												const index = String(indexRow) + String(indexCell);
-												let active = (indexActive === index);
 				
 												return (
-													<Cell other={other}
-														index={index}
-														isActive={active}
-														key={index} />
+													<Cell cell={cell} index={index} key={index} />
 												)
 											})
 										}
 									</div>
 								)
-							})
-						} </FieldContext.Provider> }
+							})}
+						</FieldContext.Provider>
 					</div>
 				</div>
 			</section>
