@@ -12,10 +12,10 @@ export default class Cell extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			textureActive: this.props.other.src,
+			textureActive: this.props.cell.src,
 			plantIsActive: false,
 			textureProduct: null,
-		}
+		};
 	}
 
 	handleShovelBtn = () => {
@@ -37,17 +37,13 @@ export default class Cell extends Component {
 	}
 
 	render() {
-		const { other, isActive, index } = this.props,
-				{ modificators, isBreak, alt } = other,
+		const { cell, isActive, index } = this.props,
+				{ modificators, alt } = cell,
 				{ textureActive, plantIsActive, textureProduct } = this.state;
-				
-		const orientation = (modificators && modificators.orientation);
-	
-		const active = (isActive && isBreak);
 
 		return (
 			<FieldContext.Consumer>
-				{(handleActive) => (
+				{({ setActiveCell }) => (
 					<Fragment>
 						<Plant isActiveClass={plantIsActive ? " plant_active" : ""}
 							closePlant={(src) => {
@@ -56,12 +52,12 @@ export default class Cell extends Component {
 							}} />
 						
 						<div className="field__cell-wrapper">
-							<Menu isActive={active}
+							<Menu isActive={isActive}
 								handleShovelBtn={this.handleShovelBtn}
 								handlePlantBtn={this.handlePlantBtn} />
 
-							<div className={"field__cell" + (active ? " field__cell_active" : "")} onClick={() => handleActive(index)}>
-								<img className={"field__texture" + (orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
+							<div className={"field__cell" + (isActive ? " field__cell_active" : "")} onClick={() => setActiveCell(index)}>
+								<img className={"field__texture" + (modificators && modificators.orientation === "horizontal" ? " field__texture_orientation_horizontal" : "")}
 									src={textureActive}
 									alt={alt} />
 								<img src={textureProduct} alt="" className="field__texture-product" />
@@ -70,6 +66,6 @@ export default class Cell extends Component {
 					</Fragment>
 				)}
 			</FieldContext.Consumer>
-		)
+		);
 	}
 }

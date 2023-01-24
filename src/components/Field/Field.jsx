@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FieldContext } from "./FileldContext.jsx";
-import _ from 'lodash';
 
 import Cell from "./Cell/Cell.jsx";
 
@@ -37,50 +36,52 @@ export default class Field extends Component {
 		let field = [];
 		const fieldWidth = 10;
 		const fieldHeight = 10;
+
 		let grassMesh = mesh[0];
+		let roadMesh = mesh[1];
+		let crossMesh = mesh[2];
 
 		for (let i = 0; i < fieldHeight; i++) {
-			field[i] = [];
-
-			for (let j = 0; j < fieldWidth; j++) {
-				field[i].push(grassMesh);
-			}
-		}
-
-		const addRoad = (field, mesh) => {
-			let roadVertical = _.cloneDeep(mesh);
-			let roadHorizontal = _.cloneDeep(mesh);
-			roadVertical.modificators.orientation = "vertical";
-			roadHorizontal.modificators.orientation = "horizontal";
-
-			field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = roadVertical;
-			field[5][6] = field[6][6] = field[7][6] = field[8][6] = roadVertical;
-
-			field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = roadHorizontal;
-		}
-
-		const addCross = (field, mesh) => {
-			field[4][4], field[4][6] = mesh;
+			field[i] = new Array(fieldWidth).fill(grassMesh);
 		}
 		
-		addRoad(field, mesh[1]);
-		addCross(field, mesh[2]);
+		this.addRoad(field, roadMesh);
+		this.addCross(field, crossMesh);
 
 		return field;
 	}
-	
-	constructor(props) {
-		super(props);
-		this.state = {
-			indexActive: null
-		}
+
+
+	addRoad = (field, mesh) => {
+		let vertical = { ...mesh, modificators: {orientation: "vertical"} };
+		let horizontal = { ...mesh, modificators: {orientation: "horizontal"} };
+
+		field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = vertical;
+		field[5][6] = field[6][6] = field[7][6] = field[8][6] = vertical;
+
+		field[4][0] = field[4][1] = field[4][3] = field[4][5] = field[4][7] = field[4][8] = horizontal;
 	}
 
-	handleActive = (index) => {
+
+	addCross = (field, mesh) => {
+		field[4][4], field[4][6] = mesh;
+	}
+
+
+	constructor() {
+		super();
+		this.state = {
+			indexActive: null,
+		};
+	}
+
+
+	setActiveCell = (index) => {
 		this.setState({
-			indexActive: index
+			indexActive: index,
 		})
 	}
+
 
 	render() {
 		const { indexActive } = this.state;
@@ -89,30 +90,34 @@ export default class Field extends Component {
 			<section className="field">
 				<div className="field__container">
 					<div className="field__content">
-						{ <FieldContext.Provider value={this.handleActive}> {
+						<FieldContext.Provider value={{
+							setActiveCell: this.setActiveCell
+						}}>{
 							this.createField(mesh_db).map((row, indexRow) => {
 								return (
 									<div className="field__row" key={indexRow}>
 										{
-											row.map(({ ...other }, indexCell) => {
-												const index = String(indexRow) + String(indexCell);
-												let active = (indexActive === index);
+											row.map(({ isBreak, ...cell }, indexCell) => {
+												const index = `${indexRow}${indexCell}`;
+												let active = ((indexActive === index) && isBreak);
 				
 												return (
-													<Cell other={other}
+													<Cell
+														cell={cell}
 														index={index}
 														isActive={active}
-														key={index} />
-												)
+														key={index}
+													/>
+												);
 											})
 										}
 									</div>
-								)
-							})
-						} </FieldContext.Provider> }
+								);
+							})}
+						</FieldContext.Provider>
 					</div>
 				</div>
 			</section>
-		)
+		);
 	}
 }
