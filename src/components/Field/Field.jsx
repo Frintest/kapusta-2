@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { FieldContext } from "./FileldContext.jsx";
+import { cloneDeep } from "lodash";
+// import { FieldContext } from "./FileldContext.jsx";
 
 import Cell from "./Cell/Cell.jsx";
 
@@ -15,6 +16,7 @@ const mesh_db = [
 		src: textureGrass,
 		isBreak: true,
 		alt: "заросли",
+		modificators: {},
 	},
 	{
 		name:"road",
@@ -28,6 +30,7 @@ const mesh_db = [
 		src: textureCross,
 		isBreak: false,
 		alt: "перекрёсток",
+		modificators: {},
 	},
 ];
 
@@ -37,12 +40,16 @@ export default class Field extends Component {
 		const fieldWidth = 10;
 		const fieldHeight = 10;
 
-		let grassMesh = mesh[0];
-		let roadMesh = mesh[1];
-		let crossMesh = mesh[2];
+		let grassMesh = mesh[0],
+			roadMesh = mesh[1],
+			crossMesh = mesh[2];
 
 		for (let i = 0; i < fieldHeight; i++) {
-			field[i] = new Array(fieldWidth).fill(grassMesh);
+			field[i] = [];
+
+			for (let j = 0; j < fieldWidth; j++) {
+				field[i].push(grassMesh);
+			}
 		}
 		
 		this.addRoad(field, roadMesh);
@@ -53,8 +60,11 @@ export default class Field extends Component {
 
 
 	addRoad = (field, mesh) => {
-		let vertical = { ...mesh, modificators: {orientation: "vertical"} };
-		let horizontal = { ...mesh, modificators: {orientation: "horizontal"} };
+		const vertical = mesh; // нет смысла клонировать
+		const horizontal = cloneDeep(mesh);
+
+		vertical.modificators.orientation = "vertical";
+		horizontal.modificators.orientation = "horizontal";
 
 		field[0][4] = field[1][4] = field[2][4] = field[3][4] = field[5][4] = field[6][4] = vertical;
 		field[5][6] = field[6][6] = field[7][6] = field[8][6] = vertical;
@@ -64,57 +74,72 @@ export default class Field extends Component {
 
 
 	addCross = (field, mesh) => {
-		field[4][4], field[4][6] = mesh;
+		field[4][6] = mesh;
 	}
 
 
 	constructor() {
 		super();
 		this.state = {
-			indexActive: null,
+			field: this.createField(mesh_db),
 		};
 	}
 
 
 	setActiveCell = (index) => {
-		this.setState({
-			indexActive: index,
-		})
+		const field = this.state.field.slice();
+	
+		field.forEach((row) => {
+			row.forEach((cell) => {
+				cell.modificators.active = false;
+			});
+		});
+
+		const rowIndex = Math.trunc(index / 10);
+		const cellIndex = index % 10;
+
+		let isActiveCell = cloneDeep(field[rowIndex][cellIndex]);
+
+		const { isBreak } = isActiveCell;
+
+		// TODO: если в modificators присутствует поле orientation = "horizontal",
+		// то оно не меняется, но визуально оно равно vertical
+		// возможно из-за неправильного клонирования объекта
+		// fix bag: isBreak = false (где есть orientation)
+
+		isActiveCell.modificators.active = isBreak ? true : false;
+
+		field[rowIndex][cellIndex] = isActiveCell;
+
+		this.setState({field: field});
 	}
 
 
 	render() {
-		const { indexActive } = this.state;
+		const { field } = this.state;
 
 		return (
 			<section className="field">
 				<div className="field__container">
 					<div className="field__content">
-						<FieldContext.Provider value={{
-							setActiveCell: this.setActiveCell
-						}}>{
-							this.createField(mesh_db).map((row, indexRow) => {
-								return (
-									<div className="field__row" key={indexRow}>
-										{
-											row.map(({ isBreak, ...cell }, indexCell) => {
-												const index = `${indexRow}${indexCell}`;
-												let active = ((indexActive === index) && isBreak);
-				
-												return (
-													<Cell
-														cell={cell}
-														index={index}
-														isActive={active}
-														key={index}
-													/>
-												);
-											})
-										}
-									</div>
-								);
-							})}
-						</FieldContext.Provider>
+						{field.map((row, indexRow) => (
+							<div className="field__row" key={indexRow}>
+								{
+									row.map(({ ...cell }, indexCell) => {
+										const index = Number(`${indexRow}${indexCell}`);
+		
+										return (
+											<Cell
+												cell={cell}
+												index={index}
+												key={index}
+												setActiveCell={this.setActiveCell}
+											/>
+										);
+									})
+								}
+							</div>
+						))}
 					</div>
 				</div>
 			</section>
