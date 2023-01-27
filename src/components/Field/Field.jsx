@@ -4,12 +4,12 @@ import { FieldContext } from "./FileldContext.jsx";
 
 import Cell from "./Cell/Cell.jsx";
 
-import "./Field.scss";
-
 import textureGrass from "./assets/field-grass.png";
 import textureRoad from "./assets/field-road.png";
 import textureCross from "./assets/field-cross.png";
 import textureDigUp from "./assets/field-dig-up.png";
+
+import "./Field.scss";
 
 const mesh_db = [
 	{
@@ -17,7 +17,9 @@ const mesh_db = [
 		src: textureGrass,
 		isBreak: true,
 		alt: "заросли",
-		modificators: {},
+		modificators: {
+			culture: {},
+		},
 	},
 	{
 		name:"road",
@@ -97,21 +99,20 @@ export default class Field extends Component {
 
 	setActiveCell = (index) => {
 		const field = this.state.field.slice();
-	
+		const { rowIndex, cellIndex } = this.convertIndex(index);
+
 		field.forEach((row) => {
 			row.forEach((cell) => {
 				cell.modificators.active = false;
 			});
 		});
-		
-		const { rowIndex, cellIndex } = this.convertIndex(index);
 
-		// name = isActive так как неизвестно, будет ли ячейка активна, например это засисит от поля isBreak
+		// name = isActive, так как неизвестно, станет ли ячейка активной, например это засисит от поля isBreak
 		let isActiveCell = cloneDeep(field[rowIndex][cellIndex]);
 
 		const { isBreak } = isActiveCell;
 
-		// TODO: если в modificators присутствует поле orientation = "horizontal",
+		// TODO: если в modificators присутствует поле orientation: "horizontal",
 		// то оно не меняется, но визуально оно равно vertical
 		// возможно из-за неправильного клонирования объекта
 		// fix bag: isBreak = false (где есть orientation)
@@ -126,7 +127,6 @@ export default class Field extends Component {
 
 	deleteActiveCell = (index) => {
 		const field = this.state.field.slice();
-
 		const { rowIndex, cellIndex } = this.convertIndex(index);
 
 		field[rowIndex][cellIndex].modificators.active = false
@@ -137,10 +137,19 @@ export default class Field extends Component {
 
 	digUp = (index) => {
 		const field = this.state.field.slice();
-
 		const { rowIndex, cellIndex } = this.convertIndex(index);
 
 		field[rowIndex][cellIndex].src = textureDigUp;
+
+		this.setState({field: field});
+	}
+
+
+	plantCulture = (index, texture) => {
+		const field = this.state.field.slice();
+		const { rowIndex, cellIndex } = this.convertIndex(index);
+
+		field[rowIndex][cellIndex].modificators.culture.texture = texture;
 
 		this.setState({field: field});
 	}
@@ -154,6 +163,7 @@ export default class Field extends Component {
 				setActiveCell: this.setActiveCell,
 				deleteActiveCell: this.deleteActiveCell,
 				digUp: this.digUp,
+				plantCulture: this.plantCulture,
 			}}>
 				<section className="field">
 					<div className="field__container">

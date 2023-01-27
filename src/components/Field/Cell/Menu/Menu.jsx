@@ -32,7 +32,7 @@ export default class Menu extends Component {
 	}
 
 	render() {
-		const { isActive, index } = this.props;
+		const { isActive, index, handleActivePlant } = this.props;
 
 		return (
 			<FieldContext.Consumer>
@@ -46,6 +46,7 @@ export default class Menu extends Component {
 											className="field__cell-item"
 											onClick={() => {
 												name === "dig-up" ? digUp(index) : null;
+												name === "plant" ? handleActivePlant(true) : handleActivePlant(false);
 												deleteActiveCell(index);
 											}}
 											key={name}
