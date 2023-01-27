@@ -160,10 +160,10 @@ export default class Field extends Component {
 
 		return (
 			<FieldContext.Provider value={{
-				setActiveCell: this.setActiveCell,
-				deleteActiveCell: this.deleteActiveCell,
-				digUp: this.digUp,
-				plantCulture: this.plantCulture,
+				setActiveCell: this.setActiveCell, // (index)
+				deleteActiveCell: this.deleteActiveCell, // (index)
+				digUp: this.digUp, // (index)
+				plantCulture: this.plantCulture, // (index, texture)
 			}}>
 				<section className="field">
 					<div className="field__container">

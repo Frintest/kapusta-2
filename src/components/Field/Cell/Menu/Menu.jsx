@@ -5,6 +5,8 @@ import digUp from "./assets/field-cell-menu-dig-up.svg";
 import plant from "./assets/field-cell-menu-plant.svg";
 import exit from "./assets/field-cell-menu-exit.svg";
 
+import textureGrass from "../../assets/field-grass.png";
+
 import "./Menu.scss";
 
 
@@ -32,7 +34,7 @@ export default class Menu extends Component {
 	}
 
 	render() {
-		const { isActive, index, handleActivePlant } = this.props;
+		const { isActive, index, handleActivePlant, src } = this.props;
 
 		return (
 			<FieldContext.Consumer>
@@ -42,6 +44,9 @@ export default class Menu extends Component {
 							{
 								menu_db.map(({ name, icon, alt }) => {
 									return (
+												((name === "plant") && (src === textureGrass)) ||
+											 	((name === "dig-up") && (src !== textureGrass))
+											 ) ? null :
 										<li
 											className="field__cell-item"
 											onClick={() => {
@@ -54,7 +59,6 @@ export default class Menu extends Component {
 										>
 											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />
 										</li>
-									);
 								})
 							}
 						</ul>

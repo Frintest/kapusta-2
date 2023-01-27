@@ -30,7 +30,12 @@ export default class Cell extends Component {
 						{isActivePlant ? <Plant index={index} handleActivePlant={this.handleActivePlant} /> : null}
 
 						<div className="field__cell-wrapper">
-							<Menu isActive={modificators.active} index={index} handleActivePlant={this.handleActivePlant} />
+							<Menu
+								isActive={modificators.active}
+								index={index}
+								handleActivePlant={this.handleActivePlant}
+								src={src}
+							/>
 							
 							<div
 								className={"field__cell" + (modificators.active ? " field__cell_active" : "")}
