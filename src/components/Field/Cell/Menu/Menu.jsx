@@ -7,6 +7,7 @@ import exit from "./assets/field-cell-menu-exit.svg";
 
 import "./Menu.scss";
 
+
 const menu_db = [
 	{
 		name: "dig-up",
@@ -31,24 +32,22 @@ export default class Menu extends Component {
 	}
 
 	render() {
-		const { isActive, handleShovelBtn, handlePlantBtn } = this.props;
+		const { isActive, index } = this.props;
 
 		return (
 			<FieldContext.Consumer>
-				{({ setActiveCell }) => (
+				{({ deleteActiveCell }) => (
 					<div className={"field__cell-menu" + (isActive ? " field__cell-menu_active" : "")}>
 						<ul className="field__cell-list">
 							{
-								menu_db.map(({ name, icon, alt }) => {
+								menu_db.map(({ icon, alt }) => {
 									return (
-										<li className="field__cell-item"
-											onClick={() => {
-												name === "dig-up" ? handleShovelBtn() : null;
-												name === "plant" ? handlePlantBtn() : null;
-												setActiveCell(null);
-											}}
+										<li
+											className="field__cell-item"
+											onClick={() => deleteActiveCell(index)}
 											key={alt}
-											tabIndex={0}>
+											tabIndex={0}
+										>
 											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />
 										</li>
 									);

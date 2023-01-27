@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { cloneDeep } from "lodash";
-// import { FieldContext } from "./FileldContext.jsx";
+import { FieldContext } from "./FileldContext.jsx";
 
 import Cell from "./Cell/Cell.jsx";
 
@@ -98,6 +98,7 @@ export default class Field extends Component {
 		const rowIndex = Math.trunc(index / 10);
 		const cellIndex = index % 10;
 
+		// name = isActive так как неизвестно, будет ли ячейка активна, например это засисит от поля isBreak
 		let isActiveCell = cloneDeep(field[rowIndex][cellIndex]);
 
 		const { isBreak } = isActiveCell;
@@ -115,34 +116,49 @@ export default class Field extends Component {
 	}
 
 
+	deleteActiveCell = (index) => {
+		const field = this.state.field.slice();
+
+		const rowIndex = Math.trunc(index / 10);
+		const cellIndex = index % 10;
+
+		let inactiveCell = cloneDeep(field[rowIndex][cellIndex]);
+		inactiveCell.modificators.active = false;
+
+		field[rowIndex][cellIndex] = inactiveCell;
+
+		this.setState({field: field});
+	}
+
+
 	render() {
 		const { field } = this.state;
 
 		return (
-			<section className="field">
-				<div className="field__container">
-					<div className="field__content">
-						{field.map((row, indexRow) => (
-							<div className="field__row" key={indexRow}>
-								{
-									row.map(({ ...cell }, indexCell) => {
-										const index = Number(`${indexRow}${indexCell}`);
-		
-										return (
-											<Cell
-												cell={cell}
-												index={index}
-												key={index}
-												setActiveCell={this.setActiveCell}
-											/>
-										);
-									})
-								}
-							</div>
-						))}
+			<FieldContext.Provider value={{
+				setActiveCell: this.setActiveCell,
+				deleteActiveCell: this.deleteActiveCell,
+			}}>
+				<section className="field">
+					<div className="field__container">
+						<div className="field__content">
+							{field.map((row, indexRow) => (
+								<div className="field__row" key={indexRow}>
+									{
+										row.map(({ ...cell }, indexCell) => {
+											const index = Number(`${indexRow}${indexCell}`);
+			
+											return (
+												<Cell cell={cell} index={index} key={index} />
+											);
+										})
+									}
+								</div>
+							))}
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</FieldContext.Provider>
 		);
 	}
 }
