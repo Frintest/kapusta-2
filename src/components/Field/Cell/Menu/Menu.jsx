@@ -36,16 +36,19 @@ export default class Menu extends Component {
 
 		return (
 			<FieldContext.Consumer>
-				{({ deleteActiveCell }) => (
+				{({ deleteActiveCell, digUp }) => (
 					<div className={"field__cell-menu" + (isActive ? " field__cell-menu_active" : "")}>
 						<ul className="field__cell-list">
 							{
-								menu_db.map(({ icon, alt }) => {
+								menu_db.map(({ name, icon, alt }) => {
 									return (
 										<li
 											className="field__cell-item"
-											onClick={() => deleteActiveCell(index)}
-											key={alt}
+											onClick={() => {
+												name === "dig-up" ? digUp(index) : null;
+												deleteActiveCell(index);
+											}}
+											key={name}
 											tabIndex={0}
 										>
 											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />

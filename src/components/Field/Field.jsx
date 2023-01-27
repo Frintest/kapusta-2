@@ -9,6 +9,7 @@ import "./Field.scss";
 import textureGrass from "./assets/field-grass.png";
 import textureRoad from "./assets/field-road.png";
 import textureCross from "./assets/field-cross.png";
+import textureDigUp from "./assets/field-dig-up.png";
 
 const mesh_db = [
 	{
@@ -86,6 +87,14 @@ export default class Field extends Component {
 	}
 
 
+	convertIndex = (index) => {
+		const rowIndex = Math.trunc(index / 10);
+		const cellIndex = index % 10;
+
+		return {rowIndex, cellIndex};
+	}
+
+
 	setActiveCell = (index) => {
 		const field = this.state.field.slice();
 	
@@ -94,9 +103,8 @@ export default class Field extends Component {
 				cell.modificators.active = false;
 			});
 		});
-
-		const rowIndex = Math.trunc(index / 10);
-		const cellIndex = index % 10;
+		
+		const { rowIndex, cellIndex } = this.convertIndex(index);
 
 		// name = isActive так как неизвестно, будет ли ячейка активна, например это засисит от поля isBreak
 		let isActiveCell = cloneDeep(field[rowIndex][cellIndex]);
@@ -119,13 +127,20 @@ export default class Field extends Component {
 	deleteActiveCell = (index) => {
 		const field = this.state.field.slice();
 
-		const rowIndex = Math.trunc(index / 10);
-		const cellIndex = index % 10;
+		const { rowIndex, cellIndex } = this.convertIndex(index);
 
-		let inactiveCell = cloneDeep(field[rowIndex][cellIndex]);
-		inactiveCell.modificators.active = false;
+		field[rowIndex][cellIndex].modificators.active = false
 
-		field[rowIndex][cellIndex] = inactiveCell;
+		this.setState({field: field});
+	}
+
+
+	digUp = (index) => {
+		const field = this.state.field.slice();
+
+		const { rowIndex, cellIndex } = this.convertIndex(index);
+
+		field[rowIndex][cellIndex].src = textureDigUp;
 
 		this.setState({field: field});
 	}
@@ -138,6 +153,7 @@ export default class Field extends Component {
 			<FieldContext.Provider value={{
 				setActiveCell: this.setActiveCell,
 				deleteActiveCell: this.deleteActiveCell,
+				digUp: this.digUp,
 			}}>
 				<section className="field">
 					<div className="field__container">
