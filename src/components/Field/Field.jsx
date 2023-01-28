@@ -9,7 +9,6 @@ import textureRoad from "./assets/field-road.png";
 import textureCross from "./assets/field-cross.png";
 import textureDigUp from "./assets/field-dig-up.png";
 
-
 import "./Field.scss";
 
 const mesh_db = [
@@ -39,7 +38,7 @@ const mesh_db = [
 ];
 
 export default class Field extends Component {
-	createField = (mesh) => {
+	createField = (mesh, index = null, active = false, action = null) => {
 		let field = [];
 		const fieldWidth = 10;
 		const fieldHeight = 10;
@@ -49,11 +48,7 @@ export default class Field extends Component {
 			crossMesh = mesh[2];
 
 		for (let i = 0; i < fieldHeight; i++) {
-			field[i] = [];
-
-			for (let j = 0; j < fieldWidth; j++) {
-				field[i].push(grassMesh);
-			}
+			field[i] = new Array(fieldWidth).fill(mesh[0]);
 		}
 		
 		this.addRoad(field, roadMesh);
