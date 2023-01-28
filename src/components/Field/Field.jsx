@@ -9,6 +9,7 @@ import textureRoad from "./assets/field-road.png";
 import textureCross from "./assets/field-cross.png";
 import textureDigUp from "./assets/field-dig-up.png";
 
+
 import "./Field.scss";
 
 const mesh_db = [
