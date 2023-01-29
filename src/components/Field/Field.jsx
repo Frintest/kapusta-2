@@ -38,7 +38,7 @@ const mesh_db = [
 ];
 
 export default class Field extends Component {
-	createField = (mesh, index = null, active = false, action = null) => {
+	createField = (mesh) => {
 		let field = [];
 		const fieldWidth = 10;
 		const fieldHeight = 10;
@@ -48,7 +48,11 @@ export default class Field extends Component {
 			crossMesh = mesh[2];
 
 		for (let i = 0; i < fieldHeight; i++) {
-			field[i] = new Array(fieldWidth).fill(mesh[0]);
+			field[i] = [];
+
+			for (let j = 0; j < fieldWidth; j++) {
+				field[i].push(grassMesh);
+			}
 		}
 		
 		this.addRoad(field, roadMesh);
@@ -141,6 +145,17 @@ export default class Field extends Component {
 	}
 
 
+	bury = (index) => {
+		const field = this.state.field.slice();
+		const { rowIndex, cellIndex } = this.convertIndex(index);
+
+		field[rowIndex][cellIndex].src = textureGrass;
+		field[rowIndex][cellIndex].modificators.culture.texture = null;
+
+		this.setState({field: field});
+	}
+
+
 	plantCulture = (index, texture) => {
 		const field = this.state.field.slice();
 		const { rowIndex, cellIndex } = this.convertIndex(index);
@@ -159,6 +174,7 @@ export default class Field extends Component {
 				setActiveCell: this.setActiveCell, // (index)
 				deleteActiveCell: this.deleteActiveCell, // (index)
 				digUp: this.digUp, // (index)
+				bury: this.bury,
 				plantCulture: this.plantCulture, // (index, texture)
 			}}>
 				<section className="field">

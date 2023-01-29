@@ -65,10 +65,12 @@
 		font-weight: 400;
 		letter-spacing: 0.01em;
 		color: $color-light-2;
+		opacity: 0.6;
 	}
 
 	&_active>&-title {
-		color: $color-accent;
+		color: $color-light-2;
+		opacity: 1;
 		transition: .23s;
 	}
 }

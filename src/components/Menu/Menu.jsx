@@ -11,7 +11,7 @@ import market from "./assets/menu-market.svg";
 import balance from "./assets/menu-balance.svg";
 
 const menu_db = {
-	innerContentItem: [
+	menuItem: [
 		{
 			name: "Меню",
 			icon: menu,
@@ -52,20 +52,20 @@ export default class Menu extends Component {
 		super();
 		this.state = {
 			isActive: "10",
-			isOptionActive: null
-		}
+			isOptionActive: null,
+		};
 	}
 
 	handleActive = (numGroup, index) => {
 		this.setState({
-			isActive: String(numGroup) + String(index)
-		})
+			isActive: `${numGroup}${index}`
+		});
 	}
 
 	handleOptionActive = (index) => {
 		this.setState({
 			isOptionActive: index
-		})
+		});
 	}
 	
 	render() {
@@ -78,41 +78,55 @@ export default class Menu extends Component {
 						<ul className="menu__list">
 							<ul className="menu__select">
 								{
-									menu_db.innerContentItem.map(({ name, icon, options }, index) => {
+									menu_db.menuItem.map(({ name, icon, options }, index) => {
 										let numGroup = 0;
-										let active = isActive === String(numGroup) + String(index);
+										let active = (isActive === `${numGroup}${index}`);
 
 										return (
 											<Fragment key={name}>
 												<CSSTransition in={active} timeout={50}>
 													<ul className="menu__options">
 														{
-															options.map(({ name, icon }, index) => {
-																return (
-																	<li onClick={() => this.handleOptionActive(index)}
-																		className={"menu__option" + (isOptionActive === index ? " menu__option_active": "")}
-																		key={name}
-																		tabIndex={0}>
-																		<img src={icon} alt={name} className="menu__option-icon" width={sizeOptionIcon} height={sizeOptionIcon}/>
-																		<span className="menu__option-title">{name}</span>
-																	</li>
-																)
-															})
+															options.map(({ name, icon }, index) => (
+																<li
+																	onClick={() => this.handleOptionActive(index)}
+																	className={"menu__option" + (isOptionActive === index ? " menu__option_active": "")}
+																	key={name}
+																	tabIndex={0}
+																>
+																	<img
+																		src={icon}
+																		alt={name}
+																		className="menu__option-icon"
+																		width={sizeOptionIcon}
+																		height={sizeOptionIcon}
+																	/>
+																	<span className="menu__option-title">{name}</span>
+																</li>
+															))
 														}
 													</ul>
 												</CSSTransition>
 
 												<CSSTransition in={active} timeout={0}>
-													<li onClick={() => this.handleActive(numGroup, index)}
+													<li
+														onClick={() => this.handleActive(numGroup, index)}
 														className="menu__select-item"
-														tabIndex={0}>
-														<img src={icon} alt={name} className="menu__select-icon" width={sizeItemIcon} height={sizeItemIcon}/>
+														tabIndex={0}
+													>
+														<img
+															src={icon}
+															alt={name}
+															className="menu__select-icon"
+															width={sizeItemIcon}
+															height={sizeItemIcon}
+														/>
 														<span className="menu__select-title">{name}</span>
-														<button className="menu__select-exit" onClick={() => {numGroup = -1}} />
+														<button className="menu__select-exit" onClick={() => {numGroup = null}} />
 													</li>
 												</CSSTransition>
 											</Fragment>
-										)
+										);
 									})
 								}
 							</ul>
@@ -122,14 +136,22 @@ export default class Menu extends Component {
 									{
 										menu_db.linkItem.map(({ name, icon }, index) => {
 											const numGroup = 1;
-											let active = isActive === String(numGroup) + String(index);
+											let active = (isActive === `${numGroup}${index}`);
 
 											return (
-												<li onClick={() => this.handleActive(numGroup, index)}
+												<li
+													onClick={() => this.handleActive(numGroup, index)}
 													className={"menu__link-item" + (active ? " menu__link-item_active" : " menu__link-item_hover")}
 													key={name}
-													tabIndex={0}>
-													<img src={icon} alt={name} className="menu__link-icon" width={sizeItemIcon} height={sizeItemIcon}/>
+													tabIndex={0}
+												>
+													<img
+														src={icon}
+														alt={name}
+														className="menu__link-icon"
+														width={sizeItemIcon}
+														height={sizeItemIcon}
+													/>
 												</li>
 											)
 										})
