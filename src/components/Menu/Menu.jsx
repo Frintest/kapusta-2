@@ -34,12 +34,12 @@ const menu_db = {
 			icon: garden,
 		},
 		{
-			name: "Магазин",
-			icon: shop,
-		},
-		{
 			name: "Рынок",
 			icon: market,
+		},
+		{
+			name: "Магазин",
+			icon: shop,
 		},
 	],
 };

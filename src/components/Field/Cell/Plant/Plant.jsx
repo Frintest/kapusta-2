@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { FieldContext } from "../../FileldContext.jsx";
 
-import pomegranate from "./assets/plant-pomegranate.png";
+import apple from "./assets/plant-apple.png";
 import orange from "./assets/plant-orange.png";
-import banana from "./assets/plant-banana.png";
+import grape from "./assets/plant-grape.png";
 import plant from "./assets/plant-plant.svg";
 import exit from "./assets/plant-exit.svg";
 
@@ -12,22 +12,22 @@ import "./Plant.scss";
 
 const plant_db = [
 	{
-		name: "pomegranate",
-		src: pomegranate,
-		text: "Гранат",
-		count: 3,
+		name: "apple",
+		src: apple,
+		text: "Яблоки",
+		count: 2,
 	},
 	{
 		name: "orange",
 		src: orange,
 		text: "Апельсины",
-		count: 2,
+		count: 3,
 	},
 	{
-		name: "banana",
-		src: banana,
-		text: "Бананы",
-		count: 8,
+		name: "grape",
+		src: grape,
+		text: "Виноград",
+		count: 5,
 	},
 ];
 
@@ -100,6 +100,7 @@ export default class Plant extends Component {
 												name === "plant" ? plantCulture(index, plant_db[isActive].src) : null;
 												handleActivePlant(false);
 											}}
+											tabIndex={0}
 										>
 											<img src={src} alt={text} className="field__plant__stat-icon" />
 										</li>

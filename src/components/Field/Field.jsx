@@ -174,7 +174,7 @@ export default class Field extends Component {
 				setActiveCell: this.setActiveCell, // (index)
 				deleteActiveCell: this.deleteActiveCell, // (index)
 				digUp: this.digUp, // (index)
-				bury: this.bury,
+				bury: this.bury, // (index)
 				plantCulture: this.plantCulture, // (index, texture)
 			}}>
 				<section className="field">
