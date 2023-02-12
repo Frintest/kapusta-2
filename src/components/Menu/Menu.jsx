@@ -45,7 +45,7 @@ const menu_db = {
 };
 
 const sizeItemIcon = 44; // default 44px
-const sizeOptionIcon = 18; // default 18px
+const sizeMenuIcon = 18; // default 18px
 
 export default class Menu extends Component {
 	constructor() {
@@ -67,10 +67,10 @@ export default class Menu extends Component {
 			isOptionActive: index
 		});
 	}
-	
+
 	render() {
 		const { isActive, isOptionActive } = this.state;
-		
+
 		return (
 			<section className="menu">
 				<div className="menu__container">
@@ -98,8 +98,8 @@ export default class Menu extends Component {
 																		src={icon}
 																		alt={name}
 																		className="menu__option-icon"
-																		width={sizeOptionIcon}
-																		height={sizeOptionIcon}
+																		width={sizeMenuIcon}
+																		height={sizeMenuIcon}
 																	/>
 																	<span className="menu__option-title">{name}</span>
 																</li>
@@ -130,7 +130,7 @@ export default class Menu extends Component {
 									})
 								}
 							</ul>
-						
+
 							<CSSTransition in={isActive === "00"} timeout={280}>
 								<ul className="menu__link">
 									{

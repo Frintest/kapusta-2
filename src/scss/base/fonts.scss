@@ -1,6 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Cousine:wght@700&family=Roboto+Flex:opsz,wght@8..144,400&display=swap');
+@font-face {
+	font-family: "Gotham Pro";
+	// TODO webpack хочет найти файл шрифта в папе scss, а не относительно данного scss файла
+	src: url(../assets/fonts/gotham-pro/gotham-pro-regular.woff) format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
 
-/* 
-	font-family: 'Cousine', monospace;
-	font-family: 'Roboto Flex', sans-serif;
-*/
+@font-face {
+	font-family: "Gotham Pro";
+	src: url(../assets/fonts/gotham-pro/gotham-pro-bold.woff) format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}

@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App.js";
 
-import "./favicon.svg";
+import "./favicon.png";
 
 const root = ReactDOM.createRoot(document.getElementById("wrapper"));
 root.render(

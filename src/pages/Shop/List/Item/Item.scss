@@ -1,0 +1,55 @@
+@import "../../../../scss/utilities/variables.scss";
+
+.shop__item {
+	width: 270px;
+	margin-top: 16px;
+	margin-left: 16px;
+	padding: 14px;
+	display: flex;
+	align-items: center;
+	border-radius: $border-radius;
+	background: $color-dark-4;
+
+	&-main-content {
+		margin-left: 12px;
+		color: $color-light-2;
+	}
+
+	&-name {
+		font-size: 17px;
+		font-weight: 400;
+	}
+
+	&-price-wrap {
+		margin-top: 10px;
+		display: flex;
+		align-items: center;
+	}
+
+	&-price {
+		font-weight: 700;
+	}
+
+	&-coin {
+		margin-left: 6px;
+	}
+
+	&-buy {
+		flex: 1 1 auto;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	&-buy-btn {
+		padding: 11px;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: $border-radius;
+		background: $color-dark-5;
+		cursor: pointer;
+		transition: .3s;
+	}
+}

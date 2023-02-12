@@ -1,0 +1,12 @@
+@import "../../scss/utilities/variables.scss";
+
+.shop__list {
+	width: 616px;
+	margin-top: -16px;
+	margin-left: -16px;
+	padding: 14px 30px 30px 14px;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: $border-radius;
+	background: $color-dark-2;
+}
