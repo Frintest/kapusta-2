@@ -11,20 +11,14 @@ import market from "./assets/menu-market.svg";
 import balance from "./assets/menu-balance.svg";
 
 const menu_db = {
-	menuItem: [
+	menuItem: [	
 		{
-			name: "Меню",
-			icon: menu,
-			options: [
-				{
-					name: "Склад",
-					icon: storage,
-				},
-				{
-					name: "Баланс",
-					icon: balance,
-				},
-			]
+			name: "Склад",
+			icon: storage,
+		},
+		{
+			name: "Баланс",
+			icon: balance,
 		},
 	],
 
@@ -44,94 +38,84 @@ const menu_db = {
 	],
 };
 
-const sizeItemIcon = 44; // default 44px
-const sizeMenuIcon = 18; // default 18px
-
 export default class Menu extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isActive: "10",
-			isOptionActive: null,
+			isActiveItem: "10",
+			isActiveMenu: false,
 		};
 	}
 
-	handleActive = (numGroup, index) => {
-		this.setState({
-			isActive: `${numGroup}${index}`
-		});
+	setActiveItem = (numGroup, index) => {
+		this.setState({isActiveItem: `${numGroup}${index}`});
 	}
 
-	handleOptionActive = (index) => {
-		this.setState({
-			isOptionActive: index
-		});
+	setActiveMenu = (value) => {
+		this.setState({isActiveMenu: value});
+	}
+
+	btnExitClicked = (evt) => {
+		evt.stopPropagation();
 	}
 
 	render() {
-		const { isActive, isOptionActive } = this.state;
+		const { isActiveItem, isActiveMenu } = this.state;
 
 		return (
-			<section className="menu">
-				<div className="menu__container">
-					<nav className="menu__nav">
-						<ul className="menu__list">
-							<ul className="menu__select">
-								{
-									menu_db.menuItem.map(({ name, icon, options }, index) => {
-										let numGroup = 0;
-										let active = (isActive === `${numGroup}${index}`);
+			<section className="nav">
+				<div className="nav__container">
+					<nav className="nav__navigation">
+						<div className="nav__menu-wrap">
+							<CSSTransition in={isActiveMenu} timeout={50}>
+								<ul className="nav__menu-list">
+									{
+										menu_db.menuItem.map(({ name, icon }, index) => {
+											let numGroup = 0;
+											let active = (isActiveItem === `${numGroup}${index}`);
 
-										return (
-											<Fragment key={name}>
-												<CSSTransition in={active} timeout={50}>
-													<ul className="menu__options">
-														{
-															options.map(({ name, icon }, index) => (
-																<li
-																	onClick={() => this.handleOptionActive(index)}
-																	className={"menu__option" + (isOptionActive === index ? " menu__option_active": "")}
-																	key={name}
-																	tabIndex={0}
-																>
-																	<img
-																		src={icon}
-																		alt={name}
-																		className="menu__option-icon"
-																		width={sizeMenuIcon}
-																		height={sizeMenuIcon}
-																	/>
-																	<span className="menu__option-title">{name}</span>
-																</li>
-															))
-														}
-													</ul>
-												</CSSTransition>
+											return (
+												<li
+													onClick={() => this.setActiveItem(numGroup, index)}
+													className={"nav__menu-link" + (active ? " nav__menu-link_active": "")}
+													tabIndex={0}
+													key={name}
+												>
+													<img
+														src={icon}
+														alt={name}
+														className="nav__menu-link-icon"
+														width={18}
+														height={18}
+													/>
+													<span className="nav__menu-link-title">{name}</span>
+												</li>
+											);
+										})
+									}
+								</ul>
+							</CSSTransition>
 
-												<CSSTransition in={active} timeout={0}>
-													<li
-														onClick={() => this.handleActive(numGroup, index)}
-														className="menu__select-item"
-														tabIndex={0}
-													>
-														<img
-															src={icon}
-															alt={name}
-															className="menu__select-icon"
-															width={sizeItemIcon}
-															height={sizeItemIcon}
-														/>
-														<span className="menu__select-title">{name}</span>
-														<button className="menu__select-exit" onClick={() => {numGroup = null}} />
-													</li>
-												</CSSTransition>
-											</Fragment>
-										);
-									})
-								}
-							</ul>
+							<div className={"nav__menu" + (isActiveMenu ? " nav__menu_active" : "")}
+								onClick={() => this.setActiveMenu(true)}
+								tabIndex={0}
+							>
+								<img
+									src={menu}
+									alt="Меню"
+									className="nav__menu-icon"
+									width={44}
+									height={44}
+								/>
+								<span className="nav__menu-text">Меню</span>
+								<button className="nav__menu-btn-exit" onClick={(evt) => {
+									this.btnExitClicked(evt);
+									this.setActiveMenu(false);
+								}} tabIndex={0} />
+							</div>
+						</div>
 
-							<CSSTransition in={isActive === "00"} timeout={280}>
+							{/* <CSSTransition in={isActive === "00"} timeout={280}>
 								<ul className="menu__link">
 									{
 										menu_db.linkItem.map(({ name, icon }, index) => {
@@ -153,12 +137,11 @@ export default class Menu extends Component {
 														height={sizeItemIcon}
 													/>
 												</li>
-											)
+											);
 										})
 									}
 								</ul>
-							</CSSTransition>
-						</ul>
+							</CSSTransition> */}
 					</nav>
 				</div>
 			</section>

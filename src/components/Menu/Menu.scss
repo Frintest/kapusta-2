@@ -1,18 +1,15 @@
 @import "../../scss/utilities/variables.scss";
 
-.menu__container {
+.nav__container {
 	position: relative;
 }
 
-.menu__nav {
+.nav__navigation {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
 	bottom: 110px;
 	z-index: 30;
-}
-
-.menu__list {
 	width: 300px; // 1 подгон для CSSTransition
 	padding: $padding;
 	display: flex;
@@ -21,12 +18,12 @@
 	background: $color-dark-2;
 }
 
-.menu__select {
+.nav__menu-wrap {
 	display: flex;
 	flex-direction: column;
 }
 
-.menu__options {
+.nav__menu-list {
 	display: none;
 	width: 100%;
 	margin-bottom: $padding;
@@ -39,71 +36,25 @@
 	}
 }
 
-.menu__option {
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-
-		&+& {
-		margin-top: 10px;
-	}
-
-	&-icon {
-		opacity: 0.6;
-	}
-
-	&_active>&-icon {
-		opacity: 1;
-		transition: .23s;
-	}
-
-	&-title {
-		display: block;
-		margin-left: $padding;
-		font-size: 16px;
-		font-weight: 400;
-		letter-spacing: 0.01em;
-		color: $color-light-2;
-		opacity: 0.6;
-	}
-
-	&_active>&-title {
-		color: $color-light-2;
-		opacity: 1;
-		transition: .23s;
-	}
-}
-
-.menu__select-item {
-	display: flex;
-	align-items: center;
+.nav__menu {
+	width: 74px; // 2 подгон для CSSTransition
 	padding: 15px;
+	display: flex;
+	align-items: center;
 	background: $color-dark-5;
+	transition: $transition;
 
-	&.enter,
-	&.exit-done {
-		width: 74px; // 2 подгон для CSSTransition
-		transition: .3s;
-	}
-
-	&.enter-done,
-	&.exit {
+	&_active {
 		width: 288px; // 3 подгон для CSSTransition
-		transition: .3s;
 	}
 
-	&.enter-done>.menu__select-icon,
-	&.exit>.menu__select-icon {
-		opacity: 1;
-	}
-
-	&.enter-done>.menu__select-title,
-	&.enter-done>.menu__select-exit {
+	&_active>.nav__menu-text,
+	&_active>.nav__menu-btn-exit {
 		display: block;
 	}
 }
 
-.menu__select-title {
+.nav__menu-text {
 	display: none;
 	flex: 1 1 auto;
 	margin-left: $padding;
@@ -114,7 +65,7 @@
 	color: #747C75;
 }
 
-.menu__select-exit {
+.nav__menu-btn-exit {
 	width: 25px;
 	height: 25px;
 	display: none;
@@ -145,7 +96,30 @@
 	}
 }
 
-.menu__link {
+.nav__menu-link {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	opacity: 0.6;
+	transition: opacity .23s;
+
+	&+& {
+		margin-top: 10px;
+	}
+
+	&-title {
+		display: block;
+		margin-left: $padding;
+		letter-spacing: 0.01em;
+		color: $color-light-2;
+	}
+
+	&_active {
+		opacity: 1;
+	}
+}
+
+.nav__link {
 	margin-left: $padding;
 	display: flex;
 	align-items: center;
@@ -165,7 +139,7 @@
 	}
 }
 
-.menu__link-item {
+.nav__link-item {
 	padding: 8px;
 	background: $color-dark-3;
 
@@ -174,26 +148,25 @@
 		background: $color-dark-1;
 	}
 
-	&_active .menu__link-icon {
+	&_active .nav__link-icon {
 		opacity: 1;
 	}
 }
 
-.menu__select-item,
-.menu__link-item {
-	border-radius: $border-radius;
-	cursor: pointer;
-	transition: .3s;
-}
-
-.menu__select-item+.menu__select-item,
-.menu__link-item+.menu__link-item {
+.menu__link-item+.nav__link-item {
 	margin-left: $padding;
 }
 
-.menu__select-icon,
-.menu__link-icon {
+.nav__menu,
+.nav__link-item {
+	border-radius: $border-radius;
+	cursor: pointer;
+	transition: $transition;
+}
+
+.nav__menu-icon,
+.nav__link-icon {
 	opacity: .4;
-	transition: .3s;
+	transition: $transition;
 	user-select: none;
 }
