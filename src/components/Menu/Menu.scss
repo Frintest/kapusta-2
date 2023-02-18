@@ -7,14 +7,14 @@
 .nav__navigation {
 	position: absolute;
 	left: 50%;
+	bottom: 0;
 	transform: translate(-50%, 0);
-	bottom: 110px;
 	z-index: 30;
 	width: 302px; // 1 подгон для CSSTransition
 	padding: $padding;
 	display: flex;
 	align-items: center;
-	border-radius: 10px;
+	border-radius: $border-radius-wrap;
 	background: $color-dark-2;
 }
 

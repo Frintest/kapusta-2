@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { LocalContext } from "../../../LocalContext.jsx";
 import Item from "./Item/Item.jsx";
 
 import apple from "./assets/plant-apple-2.png";
@@ -30,15 +30,19 @@ const plant_db = [
 export default class List extends Component {
 	render() {
 		return (
-			<ul className="shop__list">
-				{
-					plant_db.map(({ name, ...other }) => {
-						return (
-							<Item item={ other } key={name} />
-						);
-					})
-				}
-			</ul>
+			<LocalContext.Consumer>
+				{({ downBalance }) => (
+					<ul className="shop__list">
+						{
+							plant_db.map(({ name, ...other }) => {
+								return (
+									<Item item={ other } key={name} downBalanceClick={(price) => downBalance(price)} />
+								);
+							})
+						}
+					</ul>
+				)}
+			</LocalContext.Consumer>
 		);
 	}
 }

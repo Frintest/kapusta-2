@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
+import { LocalContext } from "./LocalContext.jsx";
 
+import TopBar from "./components/TopBar/TopBar.jsx";
 import Menu from "./components/Menu/Menu.jsx";
 import Field from "./pages/Field/Field.jsx";
 import Shop from "./pages/Shop/Shop.jsx";
@@ -10,19 +12,44 @@ import "./scss/main.scss";
 import "./scss/media/media.scss";
 
 export default class App extends Component {
+	constructor() {
+		super();
+		this.state = {
+			balance: 10000,
+		};
+	}
+
+	upBalance = (price) => {
+		this.setState(({ balance }) => ({balance: balance + price}));
+	}
+
+	downBalance = (price) => {
+		this.setState(({ balance }) => ({balance: balance - price}));
+	}
+
 	render() {
+		const { balance } = this.state;
+		
 		return (
-			<Fragment>
-				<main className="main">
-					<Routes>
-						<Route path="/" element={<Field />}></Route>
-						<Route path="/field" element={<Field />}></Route>
-						<Route path="/shop" element={<Shop />}></Route>
-					</Routes>
-				</main>
-				
-				<Menu />
-			</Fragment>
-		)
+			<LocalContext.Provider value={{
+				balance: balance,
+				upBalance: this.upBalance, // (price)
+				downBalance: this.downBalance, // (price)
+			}}>
+				<Fragment>
+					<TopBar />
+
+					<main className="main">
+						<Routes>
+							<Route path="/" element={<Field />}></Route>
+							<Route path="/field" element={<Field />}></Route>
+							<Route path="/shop" element={<Shop />}></Route>
+						</Routes>
+					</main>
+
+					<Menu />
+				</Fragment>
+			</LocalContext.Provider>
+		);
 	}
 }

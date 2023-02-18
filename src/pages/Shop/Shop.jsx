@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import List from "./List/List.jsx"
 
 import "./Shop.scss"

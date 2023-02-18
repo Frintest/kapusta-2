@@ -10,7 +10,7 @@ export default class Item extends Component {
 	}
 
 	render() {
-		const { item } = this.props,
+		const { item, downBalanceClick } = this.props,
 				{ src, text, price } = item;
 
 		return (
@@ -25,7 +25,7 @@ export default class Item extends Component {
 					</div>
 				</div>
 
-				<div className="shop__item-buy">
+				<div className="shop__item-buy" onClick={() => downBalanceClick(price)}>
 					<button className="shop__item-buy-btn">
 						<svg className="shop__item-buy-icon" width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path

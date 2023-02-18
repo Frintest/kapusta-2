@@ -1,0 +1,30 @@
+@import "../../scss/utilities/variables.scss";
+
+.top-bar__container {
+	position: relative;
+}
+
+.top-bar__panel {
+	position: absolute;
+	width: 100%;
+	padding: 18px;
+	left: 50%;
+	top: 0;
+	transform: translate(-50%, 0);
+	z-index: 31;
+	border-radius: $border-radius-wrap;
+}
+
+.top-bar__balance-wrap {
+	display: flex;
+	align-items: center;
+	margin-left: 25px;
+}
+
+.top-bar__balance {
+	display: block;
+	margin-left: 10px;
+	font-size: 20px;
+	font-weight: 700;
+	color: $color-dark-2;
+}
