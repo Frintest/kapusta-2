@@ -14,8 +14,10 @@ export default class Item extends Component {
 				{ src, text, price } = item;
 
 		return (
-			<li className="shop__item">
-				<img src={src} alt={text} className="shop__item-image" width={50} height={50} />
+			<li className={"shop__item" + (price >= 1000 ? " shop__item_rarity_rare" : "")}>
+				<div className="shop__item-image-wrap">
+					<img src={src} alt={text} className="shop__item-image" height={50} />
+				</div>
 
 				<div className="shop__item-main-content">
 					<p className="shop__item-name">{text}</p>

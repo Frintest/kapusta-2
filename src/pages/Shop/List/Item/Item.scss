@@ -10,6 +10,27 @@
 	border-radius: $border-radius;
 	background: $color-dark-4;
 
+	&_rarity_rare {
+		background: linear-gradient(135deg, #DDD72D, #FDB42D);
+		box-shadow: 0px 0px 20px #DDD72D;
+
+		.shop__item-main-content {
+			color: $color-dark-4;
+		}
+	}
+
+	&-image-wrap {
+		width: 50px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&-image {
+		max-width: 50px;
+	}
+
 	&-main-content {
 		margin-left: 12px;
 		color: $color-light-2;

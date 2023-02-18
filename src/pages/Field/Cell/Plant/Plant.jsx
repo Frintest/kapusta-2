@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { FieldContext } from "../../FileldContext.jsx";
 
-import apple from "./assets/plant-apple.png";
-import orange from "./assets/plant-orange.png";
-import grape from "./assets/plant-grape.png";
+import apple from "../../../../assets/plant/plant-apple.png";
+import orange from "../../../../assets/plant/plant-orange.png";
+import grape from "../../../../assets/plant/plant-grape.png";
 import plant from "./assets/plant-plant.svg";
 import exit from "./assets/plant-exit.svg";
 
@@ -89,7 +89,7 @@ export default class Plant extends Component {
 							<li className="plant__item">
 								<span className="plant__item-name">{plant_db[isActive].text}</span>
 							</li>
-							
+
 							<ul className="plant__stat">
 								{
 									plantStats_db.map(({ name, text, src }) => (
