@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
 import "./Menu.scss";
@@ -71,11 +72,12 @@ export default class Menu extends Component {
 								<ul className="nav__menu-list">
 									{
 										menu_db.menuItem.map(({ name, icon }, index) => {
-											let numGroup = 0;
+											const numGroup = 0;
 											let active = (isActiveItem === `${numGroup}${index}`);
 
 											return (
-												<li
+												<Link
+													to="/"
 													onClick={() => this.setActiveItem(numGroup, index)}
 													className={"nav__menu-link" + (active ? " nav__menu-link_active": "")}
 													tabIndex={0}
@@ -89,14 +91,15 @@ export default class Menu extends Component {
 														height={18}
 													/>
 													<span className="nav__menu-link-title">{name}</span>
-												</li>
+												</Link>
 											);
 										})
 									}
 								</ul>
 							</CSSTransition>
 
-							<div className={"nav__menu" + (isActiveMenu ? " nav__menu_active" : "")}
+							<div
+								className={"nav__menu" + (isActiveMenu ? " nav__menu_active" : "")}
 								onClick={() => this.setActiveMenu(true)}
 								tabIndex={0}
 							>
@@ -115,33 +118,37 @@ export default class Menu extends Component {
 							</div>
 						</div>
 
-							{/* <CSSTransition in={isActive === "00"} timeout={280}>
-								<ul className="menu__link">
-									{
-										menu_db.linkItem.map(({ name, icon }, index) => {
-											const numGroup = 1;
-											let active = (isActive === `${numGroup}${index}`);
+						<CSSTransition in={isActiveMenu} timeout={280}>
+							<ul className="nav__list">
+								{
+									menu_db.linkItem.map(({ name, icon }, index) => {
+										const numGroup = 1;
+										let active = (isActiveItem === `${numGroup}${index}`);
 
-											return (
-												<li
-													onClick={() => this.handleActive(numGroup, index)}
-													className={"menu__link-item" + (active ? " menu__link-item_active" : " menu__link-item_hover")}
-													key={name}
-													tabIndex={0}
-												>
-													<img
-														src={icon}
-														alt={name}
-														className="menu__link-icon"
-														width={sizeItemIcon}
-														height={sizeItemIcon}
-													/>
-												</li>
-											);
-										})
-									}
-								</ul>
-							</CSSTransition> */}
+										return (
+											<Link
+												to={
+													name === "Сад" ? "/field" :
+													name === "Магазин" ? "/shop" : "/"
+												}
+												onClick={() => this.setActiveItem(numGroup, index)}
+												className={"nav__item" + (active ? " nav__item_active" : " nav__item_hover")}
+												key={name}
+												tabIndex={0}
+											>
+												<img
+													className="nav__item-icon"
+													src={icon}
+													alt={name}
+													width={44}
+													height={44}
+												/>
+											</Link>
+										);
+									})
+								}
+							</ul>
+						</CSSTransition>
 					</nav>
 				</div>
 			</section>

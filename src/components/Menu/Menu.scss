@@ -10,7 +10,7 @@
 	transform: translate(-50%, 0);
 	bottom: 110px;
 	z-index: 30;
-	width: 300px; // 1 подгон для CSSTransition
+	width: 302px; // 1 подгон для CSSTransition
 	padding: $padding;
 	display: flex;
 	align-items: center;
@@ -41,8 +41,10 @@
 	padding: 15px;
 	display: flex;
 	align-items: center;
+	border-radius: $border-radius;
 	background: $color-dark-5;
-	transition: $transition;
+	cursor: pointer;
+	transition: width $transition;
 
 	&_active {
 		width: 288px; // 3 подгон для CSSTransition
@@ -51,6 +53,10 @@
 	&_active>.nav__menu-text,
 	&_active>.nav__menu-btn-exit {
 		display: block;
+	}
+
+	&_active>.nav__menu-icon {
+		opacity: 1;
 	}
 }
 
@@ -119,7 +125,7 @@
 	}
 }
 
-.nav__link {
+.nav__list {
 	margin-left: $padding;
 	display: flex;
 	align-items: center;
@@ -139,34 +145,30 @@
 	}
 }
 
-.nav__link-item {
-	padding: 8px;
+.nav__item {
+	padding: 9px;
 	background: $color-dark-3;
+	border-radius: $border-radius;
+	cursor: pointer;
+	transition: background $transition;
+
+	&+& {
+		margin-left: $padding;
+	}
 
 	&_hover:hover,
 	&_active {
 		background: $color-dark-1;
 	}
 
-	&_active .nav__link-icon {
+	&_active .nav__item-icon {
 		opacity: 1;
 	}
 }
 
-.menu__link-item+.nav__link-item {
-	margin-left: $padding;
-}
-
-.nav__menu,
-.nav__link-item {
-	border-radius: $border-radius;
-	cursor: pointer;
-	transition: $transition;
-}
-
 .nav__menu-icon,
-.nav__link-icon {
+.nav__item-icon {
 	opacity: .4;
-	transition: $transition;
+	transition: opacity $transition;
 	user-select: none;
 }
