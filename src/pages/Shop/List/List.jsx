@@ -10,6 +10,15 @@ import melon from "../../../assets/plant/plant-melon.png";
 import corn from "../../../assets/plant/plant-corn.png";
 import pumpkin from "../../../assets/plant/plant-pumpkin.png";
 import eggplant from "../../../assets/plant/plant-eggplant.png";
+import potato from "../../../assets/plant/plant-potato.png";
+import tomato from "../../../assets/plant/plant-tomato.png";
+import mushroom from "../../../assets/plant/plant-mushroom.png";
+import pear from "../../../assets/plant/plant-pear.png";
+import onion from "../../../assets/plant/plant-onion.png";
+import cocoa from "../../../assets/plant/plant-cocoa.png";
+import cherry from "../../../assets/plant/plant-cherry.png";
+import beet from "../../../assets/plant/plant-beet.png";
+import plum from "../../../assets/plant/plant-plum.png";
 
 const plant_db = [
 	{
@@ -59,6 +68,60 @@ const plant_db = [
 		src: eggplant,
 		text: "Баклажан",
 		price: 142,
+	},
+	{
+		name: "potato",
+		src: potato,
+		text: "Картофель",
+		price: 150,
+	},
+	{
+		name: "tomato",
+		src: tomato,
+		text: "Томат",
+		price: 187,
+	},
+	{
+		name: "mushroom",
+		src: mushroom,
+		text: "Гриб",
+		price: 396,
+	},
+	{
+		name: "pear",
+		src: pear,
+		text: "Груша",
+		price: 245,
+	},
+	{
+		name: "onion",
+		src: onion,
+		text: "Лук",
+		price: 560,
+	},
+	{
+		name: "cocoa",
+		src: cocoa,
+		text: "Какао",
+		price: 2800,
+	},
+	{
+		name: "cherry",
+		src: cherry,
+		text: "Вишня",
+		price: 965,
+	},
+	{
+		name: "beet",
+		src: beet,
+		text: "Свекла",
+		price: 562,
+	},
+	{
+		name: "plum",
+		src: plum,
+		text: "Слива",
+		price: 876,
 	},
 ];
 

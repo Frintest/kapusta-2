@@ -9,17 +9,12 @@ import garden from "./assets/menu-garden.svg";
 import storage from "./assets/menu-storage.svg";
 import shop from "./assets/menu-shop.svg";
 import market from "./assets/menu-market.svg";
-import balance from "./assets/menu-balance.svg";
 
 const menu_db = {
-	menuItem: [	
+	menuItem: [
 		{
 			name: "Склад",
 			icon: storage,
-		},
-		{
-			name: "Баланс",
-			icon: balance,
 		},
 	],
 
@@ -152,6 +147,6 @@ export default class Menu extends Component {
 					</nav>
 				</div>
 			</section>
-		)
+		);
 	}
 }

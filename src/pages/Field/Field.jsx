@@ -54,7 +54,7 @@ export default class Field extends Component {
 				field[i].push(grassMesh);
 			}
 		}
-		
+
 		this.addRoad(field, roadMesh);
 		this.addCross(field, crossMesh);
 
@@ -107,7 +107,7 @@ export default class Field extends Component {
 			});
 		});
 
-		// name = isActive, так как неизвестно, станет ли ячейка активной, например это засисит от поля isBreak
+		// name = isActive, а не Active, так как неизвестно, станет ли ячейка активной, например это засисит от поля isBreak
 		let isActiveCell = cloneDeep(field[rowIndex][cellIndex]);
 
 		const { isBreak } = isActiveCell;
@@ -185,7 +185,7 @@ export default class Field extends Component {
 									{
 										row.map(({ ...cell }, indexCell) => {
 											const index = Number(`${indexRow}${indexCell}`);
-			
+
 											return (
 												<Cell cell={cell} index={index} key={index} />
 											);
