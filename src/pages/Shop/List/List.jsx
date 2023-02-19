@@ -3,6 +3,8 @@ import { AppContext } from "../../../AppContext.js";
 import { plant_db } from "../../../AppStorage/plant/plant.js";
 import Item from "./Item/Item.jsx";
 
+import "./List.scss";
+
 export default class List extends Component {
 	constructor(props) {
 		super(props);
@@ -16,10 +18,10 @@ export default class List extends Component {
 				{({ downBalance }) => (
 					<ul className="shop__list">
 						{
-							plant_db.map(({ name, category, ...other }) => {
-								return activeCategory === category ? (
-									<Item item={ other } key={name} downBalanceClick={(price) => downBalance(price)} />
-								) : null;
+							Object.entries(plant_db).map(([ category, list ]) => {
+								 (activeCategory === category) ? list.map(({ name, ...other }) => (
+									<Item item={other} downBalanceClick={(price) => downBalance(price)} key={name} />
+								)) : null;
 							})
 						}
 					</ul>

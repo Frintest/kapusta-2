@@ -23,7 +23,7 @@ export default class Item extends Component {
 					<p className="shop__item-name">{text}</p>
 					<div className="shop__item-price-wrap">
 						<span className="shop__item-price">{price}</span>
-						<img src={coin} alt="баланс" className="shop__item-coin" height={14} />
+						<img src={coin} alt="Баланс" className="shop__item-coin" height={14} />
 					</div>
 				</div>
 

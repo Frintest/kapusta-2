@@ -25,7 +25,7 @@ const tabs_db = [
 		name: "cocoa",
 		src: cocoa,
 		text: "Семена и прочее",
-		category: "1",
+		category: "seeds",
 	},
 ];
 
