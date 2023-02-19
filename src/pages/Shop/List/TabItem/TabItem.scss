@@ -1,0 +1,39 @@
+@import "../../../../scss/utilities/variables.scss";
+
+.shop__tab {
+	padding: 14px;
+	border-radius: $border-radius;
+	background: #383D38;
+	cursor: pointer;
+	transition: $transition;
+
+	&:hover,
+	&_active {
+		background: $color-dark-4;
+	}
+
+	&_active {
+		.shop__tab-icon-wrap {
+			opacity: 1;
+		}
+	}
+
+	&+& {
+		margin-top: 12px;
+	}
+
+	&-icon-wrap {
+		width: 20px;
+		height: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0.5;
+		transition: opacity 0.3s;
+	}
+
+	&-icon {
+		max-width: 20px;
+		max-height: 20px;
+	}
+}

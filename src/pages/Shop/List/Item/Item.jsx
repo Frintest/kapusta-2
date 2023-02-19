@@ -16,14 +16,14 @@ export default class Item extends Component {
 		return (
 			<li className={"shop__item" + (price >= 1000 ? " shop__item_rarity_rare" : "")}>
 				<div className="shop__item-image-wrap">
-					<img src={src} alt={text} className="shop__item-image" height={50} />
+					<img src={src} alt={text} className="shop__item-image" />
 				</div>
 
 				<div className="shop__item-main-content">
 					<p className="shop__item-name">{text}</p>
 					<div className="shop__item-price-wrap">
 						<span className="shop__item-price">{price}</span>
-						<img src={coin} alt="монета" className="shop__item-coin" height={14} />
+						<img src={coin} alt="баланс" className="shop__item-coin" height={14} />
 					</div>
 				</div>
 

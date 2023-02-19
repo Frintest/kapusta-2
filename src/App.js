@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
-import { LocalContext } from "./LocalContext.jsx";
+import { AppContext } from "./AppContext.js";
 
 import TopBar from "./components/TopBar/TopBar.jsx";
 import Menu from "./components/Menu/Menu.jsx";
@@ -29,9 +29,9 @@ export default class App extends Component {
 
 	render() {
 		const { balance } = this.state;
-		
+
 		return (
-			<LocalContext.Provider value={{
+			<AppContext.Provider value={{
 				balance: balance,
 				upBalance: this.upBalance, // (price)
 				downBalance: this.downBalance, // (price)
@@ -41,7 +41,7 @@ export default class App extends Component {
 
 					<main className="main">
 						<Routes>
-							<Route path="/" element={<Field />}></Route>
+							<Route path="/" element={<Shop />}></Route>
 							<Route path="/field" element={<Field />}></Route>
 							<Route path="/shop" element={<Shop />}></Route>
 						</Routes>
@@ -49,7 +49,7 @@ export default class App extends Component {
 
 					<Menu />
 				</Fragment>
-			</LocalContext.Provider>
+			</AppContext.Provider>
 		);
 	}
 }

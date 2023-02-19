@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LocalContext } from "../../LocalContext.jsx";
+import { AppContext } from "../../AppContext.js";
 
 import coin from "../../pages/Shop/List/assets/coin.png"
 
@@ -8,7 +8,7 @@ import "./TopBar.scss";
 export default class TopBar extends Component {
 	render() {
 		return (
-			<LocalContext.Consumer>
+			<AppContext.Consumer>
 				{({ balance }) => (
 					<header className="top-bar">
 						<div className="top-bar__container">
@@ -21,7 +21,7 @@ export default class TopBar extends Component {
 						</div>
 					</header>
 				)}
-			</LocalContext.Consumer>
+			</AppContext.Consumer>
 		);
 	}
 }
