@@ -19,7 +19,7 @@ export default class List extends Component {
 					<ul className="shop__list">
 						{
 							Object.entries(plant_db).map(([ category, list ]) => {
-								 (activeCategory === category) ? list.map(({ name, ...other }) => (
+								 return (activeCategory === category) ? list.map(({ name, ...other }) => (
 									<Item item={other} downBalanceClick={(price) => downBalance(price)} key={name} />
 								)) : null;
 							})
