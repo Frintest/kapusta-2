@@ -27,7 +27,7 @@ export default class Item extends Component {
 					</div>
 				</div>
 
-				<div className="shop__item-buy" onClick={() => downBalanceClick(price)}>
+				<div className="shop__item-stats" onClick={() => downBalanceClick(price)}>
 					<button className="shop__item-buy-btn">
 						<svg className="shop__item-buy-icon" width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path

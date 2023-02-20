@@ -4,7 +4,7 @@ import TabItem from "./List/TabItem/TabItem.jsx";
 
 import pear from "../../assets/plant/plant-pear.png";
 import pumpkin from "../../assets/plant/plant-pumpkin.png";
-import cocoa from "../../assets/plant/plant-cocoa.png";
+import chanterelle from "../../assets/plant/plant-chanterelle.png";
 
 import "./Shop.scss"
 
@@ -22,8 +22,8 @@ const tabs_db = [
 		category: "vegetables",
 	},
 	{
-		name: "cocoa",
-		src: cocoa,
+		name: "chanterelle",
+		src: chanterelle,
 		text: "Семена и прочее",
 		category: "seeds",
 	},
