@@ -1,4 +1,4 @@
-@import "../../scss/utilities/variables.scss";
+@use "../../scss/utilities/variables.scss";
 
 .top-bar__container {
 	position: relative;
@@ -11,7 +11,7 @@
 	top: 0;
 	transform: translate(-50%, 0);
 	z-index: 31;
-	border-radius: $border-radius-wrap;
+	border-radius: variables.$border-radius-wrap;
 }
 
 .top-bar__balance-wrap {
@@ -24,5 +24,5 @@
 	margin-left: 10px;
 	font-size: 20px;
 	font-weight: 700;
-	color: $color-dark-2;
+	color: variables.$color-dark-2;
 }

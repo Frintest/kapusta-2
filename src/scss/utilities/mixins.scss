@@ -1,3 +1,5 @@
+@use "../utilities/variables.scss";
+
 #wrapper {
 	max-width: 1600px;
 	height: 100%;
@@ -12,4 +14,21 @@
 [class*="__container"] {
 	max-width: 780px;
 	margin: 0 auto;
+}
+
+.btn-exit {
+	width: 34px;
+	height: 34px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: variables.$border-radius;
+	cursor: pointer;
+	transition: variables.$transition;
+
+	&-icon {
+		width: 18px;
+		height: 18px;
+	}
 }

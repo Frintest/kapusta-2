@@ -13,7 +13,7 @@ export default class TopBar extends Component {
 					<header className="top-bar">
 						<div className="top-bar__container">
 							<div className="top-bar__panel">
-								<div className="top-bar__balance-wrap" tabIndex={0}>
+								<div className="top-bar__balance-wrap">
 									<img src={coin} alt="Баланс" className="top-bar__coin" height={17} />
 									<span className="top-bar__balance">{balance}</span>
 								</div>

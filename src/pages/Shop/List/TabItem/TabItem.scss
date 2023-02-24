@@ -1,16 +1,16 @@
-@import "../../../../scss/utilities/variables.scss";
+@use "../../../../scss/utilities/variables.scss";
 
 .shop__tab {
 	padding: 14px;
-	border-radius: $border-radius;
+	border-radius: variables.$border-radius;
 	position: relative;
 	background: #383D38;
 	cursor: pointer;
-	transition: $transition;
+	transition: variables.$transition;
 
 	&:hover,
 	&_active {
-		background: $color-dark-4;
+		background: variables.$color-dark-4;
 	}
 
 	&::before {
@@ -36,7 +36,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transition: opacity $transition;
+		transition: opacity variables.$transition;
 		position: relative;
 	}
 

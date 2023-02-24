@@ -4,7 +4,7 @@ import { FieldContext } from "../../FileldContext.jsx";
 import digUp from "./assets/field-cell-menu-dig-up.svg";
 import bury from "./assets/field-cell-menu-bury.svg";
 import plant from "./assets/field-cell-menu-plant.svg";
-import exit from "./assets/field-cell-menu-exit.svg";
+import exit from "../../../../assets/interface/btn-exit.svg";
 
 import textureGrass from "../../assets/field-grass.png";
 

@@ -5,7 +5,7 @@ import apple from "../../../../assets/plant/plant-apple.png";
 import orange from "../../../../assets/plant/plant-orange.png";
 import grape from "../../../../assets/plant/plant-grape.png";
 import plant from "./assets/plant-plant.svg";
-import exit from "./assets/plant-exit.svg";
+import exit from "../../../../assets/interface/btn-exit.svg";
 
 import "./Plant.scss";
 

@@ -1,4 +1,4 @@
-@import "../../../../scss/utilities/variables.scss";
+@use "../../../../scss/utilities/variables.scss";
 
 .shop__item {
 	width: 270px;
@@ -7,15 +7,15 @@
 	padding: 14px;
 	display: flex;
 	align-items: center;
-	border-radius: $border-radius;
-	background: $color-dark-4;
+	border-radius: variables.$border-radius;
+	background: variables.$color-dark-4;
 
 	&_rarity_rare {
 		background: linear-gradient(135deg, #DDD72D, #FDB42D);
 		box-shadow: 0px 0px 20px #DDD72D;
 
 		.shop__item-main-content {
-			color: $color-dark-4;
+			color: variables.$color-dark-4;
 		}
 	}
 
@@ -34,7 +34,7 @@
 
 	&-main-content {
 		margin-left: 12px;
-		color: $color-light-2;
+		color: variables.$color-light-2;
 	}
 
 	&-name {
@@ -68,9 +68,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border-radius: $border-radius;
-		background: $color-dark-5;
+		border-radius: variables.$border-radius;
+		background: variables.$color-dark-5;
 		cursor: pointer;
-		transition: $transition;
+		transition: variables.$transition;
 	}
 }

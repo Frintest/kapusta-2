@@ -1,16 +1,14 @@
 @use "../../scss/utilities/variables.scss";
 
-.shop__wrap {
-	display: flex;
+.storage__boxs {
 	padding: 30px;
 	background: variables.$color-dark-2;
 	border-radius: variables.$border-radius-wrap;
 }
 
-.shop__tab-list {
-	width: max-content;
-	margin-right: 30px;
+.storage__boxs-layout {
+	margin-top: -25px;
+	margin-left: -25px;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	flex-wrap: wrap;
 }

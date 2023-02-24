@@ -1,0 +1,40 @@
+@use "../../../scss/utilities/variables.scss";
+
+.storage__box {
+	flex: 1 1 auto;
+	margin-left: 25px;
+	margin-top: 25px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: variables.$color-dark-3;
+	border-radius: variables.$border-radius;
+	cursor: pointer;
+	transition: background variables.$transition;
+
+	&_active,
+	&:hover {
+		background: variables.$color-dark-4;
+
+		.storage__box-image,
+		.storage__box-title {
+			opacity: 1;
+		}
+	}
+}
+
+.storage__box-image {
+	opacity: 0.5;
+	transition: opacity variables.$transition;
+}
+
+.storage__box-title {
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: 700;
+	color: variables.$color-light-2;
+	opacity: 0.5;
+	transition: opacity variables.$transition;
+}

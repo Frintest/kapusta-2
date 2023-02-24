@@ -6,6 +6,7 @@ import TopBar from "./components/TopBar/TopBar.jsx";
 import Menu from "./components/Menu/Menu.jsx";
 import Field from "./pages/Field/Field.jsx";
 import Shop from "./pages/Shop/Shop.jsx";
+import Storage from "./pages/Storage/Storage.jsx";
 
 import "focus-visible";
 import "./scss/main.scss";
@@ -41,9 +42,10 @@ export default class App extends Component {
 
 					<main className="main">
 						<Routes>
-							<Route path="/" element={<Shop />}></Route>
+							<Route path="/" element={<Storage />}></Route>
 							<Route path="/field" element={<Field />}></Route>
 							<Route path="/shop" element={<Shop />}></Route>
+							<Route path="/storage" element={<Storage />}></Route>
 						</Routes>
 					</main>
 

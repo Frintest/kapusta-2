@@ -72,7 +72,9 @@ export default class Menu extends Component {
 
 											return (
 												<Link
-													to="/"
+												to={
+													name === "Склад" ? "/storage" : "/"
+												}
 													onClick={() => this.setActiveItem(numGroup, index)}
 													className={"nav__menu-link" + (active ? " nav__menu-link_active": "")}
 													tabIndex={0}

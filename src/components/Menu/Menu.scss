@@ -1,4 +1,4 @@
-@import "../../scss/utilities/variables.scss";
+@use "../../scss/utilities/variables.scss";
 
 .nav__container {
 	position: relative;
@@ -11,11 +11,11 @@
 	transform: translate(-50%, 0);
 	z-index: 30;
 	width: 302px; // 1 подгон для CSSTransition
-	padding: $padding;
+	padding: variables.$padding;
 	display: flex;
 	align-items: center;
-	border-radius: $border-radius-wrap;
-	background: $color-dark-2;
+	border-radius: variables.$border-radius-wrap;
+	background: variables.$color-dark-2;
 }
 
 .nav__menu-wrap {
@@ -26,10 +26,10 @@
 .nav__menu-list {
 	display: none;
 	width: 100%;
-	margin-bottom: $padding;
+	margin-bottom: variables.$padding;
 	padding: 24px;
-	border-radius: $border-radius;
-	background: $color-dark-5;
+	border-radius: variables.$border-radius;
+	background: variables.$color-dark-5;
 
 	&.enter-done {
 		display: block;
@@ -41,10 +41,10 @@
 	padding: 15px;
 	display: flex;
 	align-items: center;
-	border-radius: $border-radius;
-	background: $color-dark-5;
+	border-radius: variables.$border-radius;
+	background: variables.$color-dark-5;
 	cursor: pointer;
-	transition: width $transition;
+	transition: width variables.$transition;
 
 	&_active {
 		width: 288px; // 3 подгон для CSSTransition
@@ -63,7 +63,7 @@
 .nav__menu-text {
 	display: none;
 	flex: 1 1 auto;
-	margin-left: $padding;
+	margin-left: variables.$padding;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -78,7 +78,7 @@
 	position: relative;
 	border: none;
 	cursor: pointer;
-	background: $color-dark-5;
+	background: variables.$color-dark-5;
 
 	&::before,
 	&::after {
@@ -90,7 +90,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		border-radius: 5px;
-		background: $color-light-2;
+		background: variables.$color-light-2;
 	}
 
 	&::before {
@@ -115,9 +115,9 @@
 
 	&-title {
 		display: block;
-		margin-left: $padding;
+		margin-left: variables.$padding;
 		letter-spacing: 0.01em;
-		color: $color-light-2;
+		color: variables.$color-light-2;
 	}
 
 	&_active {
@@ -126,12 +126,12 @@
 }
 
 .nav__list {
-	margin-left: $padding;
+	margin-left: variables.$padding;
 	display: flex;
 	align-items: center;
-	padding: $padding;
-	border-radius: $border-radius;
-	background: $color-dark-4;
+	padding: variables.$padding;
+	border-radius: variables.$border-radius;
+	background: variables.$color-dark-4;
 
 	&.exit-done {
 		opacity: 1;
@@ -147,18 +147,18 @@
 
 .nav__item {
 	padding: 9px;
-	background: $color-dark-3;
-	border-radius: $border-radius;
+	background: variables.$color-dark-3;
+	border-radius: variables.$border-radius;
 	cursor: pointer;
-	transition: background $transition;
+	transition: background variables.$transition;
 
 	&+& {
-		margin-left: $padding;
+		margin-left: variables.$padding;
 	}
 
 	&_hover:hover,
 	&_active {
-		background: $color-dark-1;
+		background: variables.$color-dark-1;
 	}
 
 	&_active .nav__item-icon {
@@ -169,6 +169,6 @@
 .nav__menu-icon,
 .nav__item-icon {
 	opacity: .4;
-	transition: opacity $transition;
+	transition: opacity variables.$transition;
 	user-select: none;
 }

@@ -1,0 +1,44 @@
+@use "../../../scss/utilities/variables.scss";
+
+.storage__body {
+	padding: 20px;
+	background: variables.$color-dark-2;
+	border-radius: variables.$border-radius-wrap;
+}
+
+.storage-body {
+	&__stats {
+		display: flex;
+		align-items: center;
+	}
+
+	&__spare-panel {
+		height: 34px;
+		flex: 1 1 auto;
+		background: variables.$color-dark-4;
+		border-radius: variables.$border-radius;
+		cursor: pointer;
+	}
+
+	&__exit {
+		background: variables.$color-dark-4;
+		margin-left: variables.$padding;
+
+		&:hover {
+			background: variables.$color-dark-5;
+		}
+	}
+
+	&__main {
+		display: grid;
+		grid-template-columns: repeat(2, 240px);
+		grid-gap: 15px;
+		margin-top: 15px;
+	}
+
+	&__storage-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+		grid-gap: variables.$padding;
+	}
+}
