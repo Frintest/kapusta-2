@@ -9,7 +9,7 @@ export default class StorageItem extends Component {
 
 	render() {
 		const { item, setActiveItem, activeItem } = this.props,
-			  { name, src, text } = item;
+			  { name, src, text, count } = item;
 
 		return (
 			<li
@@ -20,7 +20,7 @@ export default class StorageItem extends Component {
 				<div className="storage-body__item-image-wrap">
 					<img src={src} alt={text} className="storage-body__item-image" />
 				</div>
-				<span className="storage-body__item-count">{56}</span>
+				<span className="storage-body__item-count">{count}</span>
 			</li>
 		);
 	}

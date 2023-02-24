@@ -50,9 +50,9 @@ export default class Shop extends Component {
 					<div className="shop__wrap">
 						<ul className="shop__tab-list">
 							{
-								tabs_db.map(({ name, ...other }) => (
+								tabs_db.map(({ name, ...item }) => (
 									<TabItem
-										item={other}
+										item={item}
 										activeCategory={activeCategory}
 										setActiveCategory={this.setActiveCategory}
 										key={name}

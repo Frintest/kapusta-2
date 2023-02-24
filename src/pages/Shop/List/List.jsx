@@ -15,12 +15,18 @@ export default class List extends Component {
 
 		return (
 			<AppContext.Consumer>
-				{({ downBalance }) => (
+				{({ downBalance, addProductInStorage }) => (
 					<ul className="shop__list">
 						{
 							Object.entries(plant_db).map(([ category, list ]) => {
-								 return (activeCategory === category) ? list.map(({ name, ...other }) => (
-									<Item item={other} downBalanceClick={(price) => downBalance(price)} key={name} />
+								 return (activeCategory === category) ? list.map(({ ...item }) => (
+									<Item
+										item={item}
+										downBalance={downBalance}
+										addProductInStorage={addProductInStorage}
+										category={category}
+										key={item.name}
+									/>
 								)) : null;
 							})
 						}

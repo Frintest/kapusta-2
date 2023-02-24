@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
+import { cloneDeep } from "lodash";
 import { AppContext } from "./AppContext.js";
 
 import TopBar from "./components/TopBar/TopBar.jsx";
@@ -17,6 +18,11 @@ export default class App extends Component {
 		super();
 		this.state = {
 			balance: 10000,
+			storage: {
+				fruits: [],
+				vegetables: [],
+				seeds: [],
+			},
 		};
 	}
 
@@ -24,18 +30,70 @@ export default class App extends Component {
 		this.setState(({ balance }) => ({balance: balance + price}));
 	}
 
+
 	downBalance = (price) => {
 		this.setState(({ balance }) => ({balance: balance - price}));
 	}
 
+
+	upCountProduct = (category, objectProduct) => {
+		const storage = cloneDeep(this.state.storage);
+
+		const product = storage[category].find(elem => elem.name === objectProduct.name);
+		product.count += 1;
+
+		this.setState({storage: storage});
+	}
+
+
+	downCountProduct = (category, objectProduct) => {
+		const storage = cloneDeep(this.state.storage);
+
+		const product = storage[category].find(elem => elem.name === objectProduct.name);
+		if (product.count === 1) {
+			this.deleteProductInStorage(category, objectProduct);
+		} else {
+			product.count -= 1;
+			this.setState({storage: storage});
+		}
+	}
+
+
+	addProductInStorage = (category, objectProduct) => {
+		const storage = cloneDeep(this.state.storage);
+
+		const product = storage[category].find(elem => elem.name === objectProduct.name);
+		if (product === undefined) {
+			objectProduct.count = 1;
+			storage[category].push(objectProduct);
+			this.setState({storage: storage});
+		} else {
+			this.upCountProduct(category, objectProduct);
+		}
+	}
+
+
+	deleteProductInStorage = (category, objectProduct) => {
+		const storage = cloneDeep(this.state.storage);
+
+		const product = storage[category].find(elem => elem.name === objectProduct.name);
+		storage[category].pop(product);
+
+		this.setState({storage: storage});
+	}
+
 	render() {
-		const { balance } = this.state;
+		const { balance, storage } = this.state;
 
 		return (
 			<AppContext.Provider value={{
 				balance: balance,
 				upBalance: this.upBalance, // (price)
 				downBalance: this.downBalance, // (price)
+				storage: storage,
+				addProductInStorage: this.addProductInStorage, // (category, objectProduct)
+				upCountProduct: this.upCountProduct, // (countProp)
+				downCountProduct: this.downCountProduct, // (countProp)
 			}}>
 				<Fragment>
 					<TopBar />

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { plant_db } from "../../../AppStorage/plant/plant.js";
+import { AppContext } from "../../../AppContext.js";
+
 import StorageItem from "./StorageItem/StorageItem.jsx";
 
 import exit from "../../../assets/interface/btn-exit.svg";
@@ -31,42 +32,46 @@ export default class StorageBody extends Component {
 		const { activeItem, objectProduct } = this.state;
 
 		return (
-			<div className="storage__body">
-				<div className="storage-body__stats">
-					<aside className="storage-body__spare-panel"></aside>
-					<button
-						className="storage-body__exit _btn-small"
-						onClick={() => {
-							setVisibleBoxsParent(true);
-							setActiveBox(null);
-						}}>
-						<div className="_btn-small__container">
-							<img src={exit} alt="Закрыть" className="_btn-small__icon" />
+			<AppContext.Consumer>
+				{({ storage }) => (
+					<div className="storage__body">
+						<div className="storage-body__stats">
+							<aside className="storage-body__spare-panel"></aside>
+							<button
+								className="storage-body__exit _btn-small"
+								onClick={() => {
+									setVisibleBoxsParent(true);
+									setActiveBox(null);
+								}}>
+								<div className="_btn-small__container">
+									<img src={exit} alt="Закрыть" className="_btn-small__icon" />
+								</div>
+							</button>
 						</div>
-					</button>
-				</div>
 
-				<div className="storage-body__main">
-					<ul className="storage-body__storage-list">
-						{
-							Object.entries(plant_db).map(([ category, list ]) => {
-								return (activeBox === category) ? list.map(({ ...item }) => (
-									<StorageItem
-										item={item}
-										setActiveItem={this.setActiveItem}
-										activeItem={activeItem}
-										key={item.name}
-									/>
-							   )) : null;
-						   })
-						}
-					</ul>
+						<div className="storage-body__main">
+							<ul className="storage-body__storage-list">
+								{
+									Object.entries(storage).map(([ category, list ]) => {
+										return (activeBox === category) ? list.map(({ ...item }) => (
+											<StorageItem
+												item={item}
+												setActiveItem={this.setActiveItem}
+												activeItem={activeItem}
+												key={item.name}
+											/>
+									)) : null;
+								})
+								}
+							</ul>
 
-					<div className="storage-body__item-content">
-						<p className="storage-body__item-title">{objectProduct.title}</p>
+							<div className="storage-body__item-content">
+								<p className="storage-body__item-title">{objectProduct.title}</p>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
+				)}
+			</AppContext.Consumer>
 		);
 	}
 }
