@@ -10,7 +10,7 @@
 	transform: translate(-50%, -80%);
 	z-index: 20;
 	display: none;
-	
+
 	&_active {
 		display: block;
 	}
@@ -25,12 +25,8 @@
 }
 
 .field__cell-item {
-	display: block;
-	padding: 10px;
 	border-radius: $border-radius;
 	background: $color-dark-1;
-	cursor: pointer;
-	transition: .2s;
 
 	&+& {
 		margin-left: $padding;
@@ -39,8 +35,4 @@
 	&:hover {
 		background: $color-dark-3;
 	}
-}
-
-.field__cell-icon {
-	user-select: none;
 }

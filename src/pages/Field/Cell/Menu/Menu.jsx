@@ -55,7 +55,7 @@ export default class Menu extends Component {
 												((name === "bury") && (src === textureGrass)) // если bury и не вскопано
 											 ) ? null :
 										<li
-											className="field__cell-item"
+											className="field__cell-item _btn-small"
 											onClick={() => {
 												name === "dig-up" ? digUp(index) : null;
 												name === "plant" ? handleActivePlant(true) : handleActivePlant(false);
@@ -65,7 +65,9 @@ export default class Menu extends Component {
 											key={name}
 											tabIndex={0}
 										>
-											<img src={icon} alt={alt} className="field__cell-icon" width={18} height={18} />
+											<div className="_btn-small__container">
+												<img src={icon} alt={alt} className="_btn-small__icon" />
+											</div>
 										</li>
 								})
 							}

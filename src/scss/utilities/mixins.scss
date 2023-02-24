@@ -16,19 +16,28 @@
 	margin: 0 auto;
 }
 
-.btn-exit {
-	width: 34px;
-	height: 34px;
+._btn-small {
+	width: 38px;
+	height: 38px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: none;
 	border-radius: variables.$border-radius;
 	cursor: pointer;
+	user-select: none;
 	transition: variables.$transition;
 
-	&-icon {
+	&__container {
 		width: 18px;
 		height: 18px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__icon {
+		max-width: 18px;
+		max-height: 18px;
 	}
 }

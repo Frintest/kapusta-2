@@ -63,14 +63,6 @@
 	}
 
 	&-buy-btn {
-		padding: 11px;
-		border: none;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: variables.$border-radius;
 		background: variables.$color-dark-5;
-		cursor: pointer;
-		transition: variables.$transition;
 	}
 }

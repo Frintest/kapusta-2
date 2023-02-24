@@ -94,15 +94,17 @@ export default class Plant extends Component {
 								{
 									plantStats_db.map(({ name, text, src }) => (
 										<li
-											className="plant__stat-item"
-											key={name}
+											className="plant__stat-item _btn-small"
 											onClick={() => {
 												name === "plant" ? plantCulture(index, plant_db[isActive].src) : null;
 												handleActivePlant(false);
 											}}
 											tabIndex={0}
+											key={name}
 										>
-											<img src={src} alt={text} className="field__plant__stat-icon" />
+											<div className="_btn-small__container">
+												<img src={src} alt={text} className="_btn-small__icon" />
+											</div>
 										</li>
 									))
 								}

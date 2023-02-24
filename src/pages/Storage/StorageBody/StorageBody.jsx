@@ -35,12 +35,14 @@ export default class StorageBody extends Component {
 				<div className="storage-body__stats">
 					<aside className="storage-body__spare-panel"></aside>
 					<button
-						className="storage-body__exit btn-exit"
+						className="storage-body__exit _btn-small"
 						onClick={() => {
 							setVisibleBoxsParent(true);
 							setActiveBox(null);
 						}}>
-						<img src={exit} alt="Закрыть" className="btn-exit-icon" />
+						<div className="_btn-small__container">
+							<img src={exit} alt="Закрыть" className="_btn-small__icon" />
+						</div>
 					</button>
 				</div>
 
