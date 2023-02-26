@@ -6,9 +6,10 @@
 
 .nav__navigation {
 	position: absolute;
-	left: 50%;
+	right: 0;
 	bottom: 0;
-	transform: translate(-50%, 0);
+	left: 0;
+	margin: auto;
 	z-index: 30;
 	width: 302px; // 1 подгон для CSSTransition
 	padding: variables.$padding;
@@ -19,8 +20,7 @@
 }
 
 .nav__menu-wrap {
-	display: flex;
-	flex-direction: column;
+	width: 100%;
 }
 
 .nav__menu-list {
@@ -47,7 +47,7 @@
 	transition: width variables.$transition;
 
 	&_active {
-		width: 288px; // 3 подгон для CSSTransition
+		width: 100%;
 	}
 
 	&_active>.nav__menu-text,
@@ -105,7 +105,6 @@
 .nav__menu-link {
 	display: flex;
 	align-items: center;
-	cursor: pointer;
 	opacity: 0.6;
 	transition: opacity .23s;
 
@@ -126,48 +125,49 @@
 }
 
 .nav__list {
-	margin-left: variables.$padding;
 	display: flex;
 	align-items: center;
+	margin-left: variables.$padding;
 	padding: variables.$padding;
 	border-radius: variables.$border-radius;
 	background: variables.$color-dark-4;
 
 	&.exit-done {
-		opacity: 1;
-		transition: .12s;
+		display: flex;
 	}
 
 	&.enter,
 	&.enter-done,
 	&.exit {
-		opacity: 0;
+		display: none;
 	}
 }
 
 .nav__item {
-	padding: 9px;
-	background: variables.$color-dark-3;
-	border-radius: variables.$border-radius;
-	cursor: pointer;
-	transition: background variables.$transition;
-
 	&+& {
 		margin-left: variables.$padding;
 	}
+}
 
-	&_hover:hover,
+.nav__item-link {
+	display: block;
+	padding: 9px;
+	background: variables.$color-dark-3;
+	border-radius: variables.$border-radius;
+	transition: background variables.$transition;
+
+	&:hover,
 	&_active {
 		background: variables.$color-dark-1;
 	}
 
-	&_active .nav__item-icon {
+	&_active .nav__item-link-icon {
 		opacity: 1;
 	}
 }
 
-.nav__menu-icon,
-.nav__item-icon {
+.nav__menu-link-icon,
+.nav__item-link-icon {
 	opacity: .4;
 	transition: opacity variables.$transition;
 	user-select: none;

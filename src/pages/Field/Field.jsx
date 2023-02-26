@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { cloneDeep } from "lodash";
 import { FieldContext } from "./FileldContext.jsx";
 
 import Cell from "./Cell/Cell.jsx";
@@ -64,7 +63,7 @@ export default class Field extends Component {
 
 	addRoad = (field, mesh) => {
 		const vertical = mesh; // нет смысла клонировать
-		const horizontal = cloneDeep(mesh);
+		const horizontal = structuredClone(mesh);
 
 		vertical.modificators.orientation = "vertical";
 		horizontal.modificators.orientation = "horizontal";
@@ -108,7 +107,7 @@ export default class Field extends Component {
 		});
 
 		// name = isActive, а не Active, так как неизвестно, станет ли ячейка активной, например это засисит от поля isBreak
-		let isActiveCell = cloneDeep(field[rowIndex][cellIndex]);
+		let isActiveCell = structuredClone(field[rowIndex][cellIndex]);
 
 		const { isBreak } = isActiveCell;
 

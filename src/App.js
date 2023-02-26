@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
-import { cloneDeep } from "lodash";
 import { AppContext } from "./AppContext.js";
 
 import TopBar from "./components/TopBar/TopBar.jsx";
@@ -37,7 +36,7 @@ export default class App extends Component {
 
 
 	upCountProduct = (category, objectProduct) => {
-		const storage = cloneDeep(this.state.storage);
+		const storage = structuredClone(this.state.storage);
 
 		const product = storage[category].find(elem => elem.name === objectProduct.name);
 		product.count += 1;
@@ -47,7 +46,7 @@ export default class App extends Component {
 
 
 	downCountProduct = (category, objectProduct) => {
-		const storage = cloneDeep(this.state.storage);
+		const storage = structuredClone(this.state.storage);
 
 		const product = storage[category].find(elem => elem.name === objectProduct.name);
 		if (product.count === 1) {
@@ -60,7 +59,7 @@ export default class App extends Component {
 
 
 	addProductInStorage = (category, objectProduct) => {
-		const storage = cloneDeep(this.state.storage);
+		const storage = structuredClone(this.state.storage);
 
 		const product = storage[category].find(elem => elem.name === objectProduct.name);
 		if (product === undefined) {
@@ -74,13 +73,23 @@ export default class App extends Component {
 
 
 	deleteProductInStorage = (category, objectProduct) => {
-		const storage = cloneDeep(this.state.storage);
+		const storage = structuredClone(this.state.storage);
 
 		const product = storage[category].find(elem => elem.name === objectProduct.name);
 		storage[category].pop(product);
 
 		this.setState({storage: storage});
 	}
+
+
+	// changeProductInStorage = (category, objectProduct) => {
+	// 	const storage = cloneDeep(this.state.storage);
+
+	// 	const product = storage[category].find(elem => elem.name === objectProduct.name);
+
+
+	// 	this.setState({storage: storage});
+	// }
 
 	render() {
 		const { balance, storage } = this.state;

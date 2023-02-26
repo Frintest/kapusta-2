@@ -71,24 +71,28 @@ export default class Menu extends Component {
 											let active = (isActiveItem === `${numGroup}${index}`);
 
 											return (
-												<Link
-												to={
-													name === "Склад" ? "/storage" : "/"
-												}
+												<li
 													onClick={() => this.setActiveItem(numGroup, index)}
-													className={"nav__menu-link" + (active ? " nav__menu-link_active": "")}
+													className="nav__menu-item"
 													tabIndex={0}
 													key={name}
 												>
-													<img
-														src={icon}
-														alt={name}
-														className="nav__menu-link-icon"
-														width={18}
-														height={18}
-													/>
-													<span className="nav__menu-link-title">{name}</span>
-												</Link>
+													<Link
+														class={"nav__menu-link" + (active ? " nav__menu-link_active": "")}
+														to={
+															name === "Склад" ? "/storage" : "/"
+														}
+													>
+														<img
+															src={icon}
+															alt={name}
+															className="nav__menu-link-icon"
+															width={18}
+															height={18}
+														/>
+														<span className="nav__menu-link-title">{name}</span>
+													</Link>
+												</li>
 											);
 										})
 									}
@@ -123,24 +127,28 @@ export default class Menu extends Component {
 										let active = (isActiveItem === `${numGroup}${index}`);
 
 										return (
-											<Link
-												to={
-													name === "Сад" ? "/field" :
-													name === "Магазин" ? "/shop" : "/"
-												}
+											<li
 												onClick={() => this.setActiveItem(numGroup, index)}
-												className={"nav__item" + (active ? " nav__item_active" : " nav__item_hover")}
-												key={name}
+												className="nav__item"
 												tabIndex={0}
+												key={name}
 											>
-												<img
-													className="nav__item-icon"
-													src={icon}
-													alt={name}
-													width={44}
-													height={44}
-												/>
-											</Link>
+												<Link
+													className={"nav__item-link" + (active ? " nav__item-link_active": "")}
+													to={
+														name === "Сад" ? "/field" :
+														name === "Магазин" ? "/shop" : "/"
+													}
+												>
+													<img
+														className="nav__item-link-icon"
+														src={icon}
+														alt={name}
+														width={44}
+														height={44}
+													/>
+												</Link>
+											</li>
 										);
 									})
 								}
